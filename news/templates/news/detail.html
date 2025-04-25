@@ -1,0 +1,7 @@
+{% if post %}
+    <h1>{{ post.title }}</h1>
+    <small>Published: <time>{{ post.created_at }}</time></small>
+    <p>{{ post.content }}</p>
+{% else %}
+    <p>News post no longer available.</p>
+{% endif %}
