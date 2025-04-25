@@ -3,8 +3,8 @@ from django.utils import timezone
 
 class Activity(models.Model):
     class Meta:
-        verbose_name = "Activity"
-        verbose_name_plural = "Activities"
+        verbose_name = 'Activity'
+        verbose_name_plural = 'Activities'
     title = models.CharField(max_length=200)
     content = models.TextField()
     start = models.DateTimeField()
