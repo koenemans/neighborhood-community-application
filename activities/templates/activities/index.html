@@ -1,0 +1,9 @@
+{% if upcoming_activity_list %}
+    <ul>
+    {% for activity in upcoming_activity_list %}
+        <li><a href="{% url 'activities:detail' activity.id %}">{{ activity.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No activities available.</p>
+{% endif %}
