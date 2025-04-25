@@ -1,11 +1,14 @@
-from django.shortcuts import render, get_object_or_404
+from django.views import generic
+
 from .models import Activity
 
-def index(request):
-    upcoming_activity_list = Activity.objects.order_by('-start')[:5]
-    context = { "upcoming_activity_list": upcoming_activity_list }
-    return render(request, 'activities/index.html', context)
+class IndexView(generic.ListView):
+    template_name = 'activities/index.html'
+    context_object_name = 'upcoming_activity_list'
 
-def detail(request, activity_id):
-    activity = get_object_or_404(Activity, pk=activity_id)
-    return render(request, 'activities/detail.html', { 'activity': activity })
+    def get_queryset(self):
+        return Activity.objects.order_by('-start')[:5]
+    
+class DetailView(generic.DetailView):
+    model = Activity
+    template_name = 'activities/detail.html'
