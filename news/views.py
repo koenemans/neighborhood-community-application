@@ -1,11 +1,15 @@
-from django.shortcuts import render, get_object_or_404
+from django.views import generic
+
 from .models import Post
 
-def index(request):
-    latest_posts_list = Post.objects.order_by('-created_at')[:5]
-    context = { "latest_posts_list": latest_posts_list }
-    return render(request, 'news/index.html', context)
+class IndexView(generic.ListView):
+    template_name = 'news/index.html'
+    context_object_name = 'latest_posts_list'
 
-def detail(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
-    return render(request, 'news/detail.html', { 'post': post })
+    def get_queryset(self):
+        """Return the last five published posts."""
+        return Post.objects.order_by('-created_at')[:5]
+    
+class DetailView(generic.DetailView):
+    model = Post
+    template_name = 'news/detail.html'
