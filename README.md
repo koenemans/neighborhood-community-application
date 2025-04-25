@@ -18,14 +18,16 @@ A publicly accessible area that displays:
 - Announcements about upcoming events and activities
 - Posters, flyers (PDFs), and event photos
 
-### 2. Committee Management Portal (Admin Area)
+### 2. Content Management Portal (Admin Area)
 A secure area for committee members to:
 - Create and publish news posts
 - Announce and manage activities
 - Upload documents (PDFs, images)
 
+The idea is to use builtin Django Groups (committees) and Users (committee members).
+
 ### 3. Targeted Content
-Posts are tagged/categorized by committee (e.g., adult, children, sports) to help residents find relevant content.
+Posts are created by committee (e.g., adult, children, sports) to help residents find relevant content.
 
 ### 4. Linked News and Activities
 News articles can be linked to specific activity announcements to create a connected experience for users.
