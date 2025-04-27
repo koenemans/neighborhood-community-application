@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, dates
 
 from .models import Post
 
@@ -13,3 +13,16 @@ class IndexView(ListView):
 class DetailView(DetailView):
     model = Post
     template_name = 'news/detail.html'
+
+class YearArchiveView(dates.YearArchiveView):
+    queryset = Post.objects.all()
+    date_field = 'created_at'
+    make_object_list = True
+    allow_future = False
+    template_name = 'news/archive_year.html'
+
+class MonthArchiveView(dates.MonthArchiveView):
+    queryset = Post.objects.all()
+    date_field = 'created_at'
+    allow_future = False
+    template_name = 'news/archive_month.html'

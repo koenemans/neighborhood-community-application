@@ -1,0 +1,17 @@
+<div>
+    <h1>All News posts for {{ month|date:"F" }}</h1>
+    <ul>
+        {% for post in object_list %}
+            <li>{{ post.created_at|date:"F j, Y" }}: {{ post.title }}</li>
+        {% endfor %}
+    </ul>
+
+    <p>
+        {% if previous_month %}
+            Previous Month: {{ previous_month|date:"F Y" }}
+        {% endif %}
+        {% if next_month %}
+            Next Month: {{ next_month|date:"F Y" }}
+        {% endif %}
+    </p>
+</div>
