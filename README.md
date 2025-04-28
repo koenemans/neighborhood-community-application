@@ -39,7 +39,7 @@ Committees can upload:
 
 ### 6. Archive Access
 An archive view allows users to:
-- Browse content organized by **year and month**
+- Browse content organized by **year and month** (EDIT: maybe add organization by **committee** as well)
 - Access past news and event history
 
 ---
