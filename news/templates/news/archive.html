@@ -1,0 +1,21 @@
+{% block content %}
+  <h1>News Archive</h1>
+
+  {% for year, months in grouped_news.items %}
+    <h2>{{ year }}</h2>
+    {% for month, committees in months.items %}
+      <h3>{{ month }}</h3>
+      {% for committee, news in committees.items %}
+        <h4>{{ committee }}</h4>
+        <ul>
+          {% for post in news %}
+            <li>
+              <h5>{{ post.title }}</h5>
+              <p>{{ post.created_at|date:"F j, Y" }}</p>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endfor %}
+    {% endfor %}
+  {% endfor %}
+{% endblock %}
