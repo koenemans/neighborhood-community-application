@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import Group
 
 class Activity(models.Model):
     class Meta:
@@ -10,6 +11,7 @@ class Activity(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField()
     location = models.CharField(max_length=200)
+    committee = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='activities')
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
