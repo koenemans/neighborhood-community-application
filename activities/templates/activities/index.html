@@ -1,7 +1,7 @@
 {% if upcoming_activity_list %}
     <ul>
     {% for activity in upcoming_activity_list %}
-        <li><a href="{% url 'activities:detail' activity.id %}">{{ activity.title }}</a></li>
+        <li><a href="{% url 'activities:detail' activity.slug %}">{{ activity.title }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

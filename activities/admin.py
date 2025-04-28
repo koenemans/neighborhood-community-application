@@ -9,8 +9,9 @@ class ActivityAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['title', 'content', 'committee']}),
         ('Practical Information', { 'fields': ['location', 'start', 'end'] }),
-        ('Metadata', { 'fields': ['created_at'] })
+        ('Metadata', { 'fields': ['created_at', 'slug'] })
     ]
+    prepopulated_fields = {'slug': ('title',)}
     
 
 admin.site.register(Activity, ActivityAdmin)
