@@ -8,8 +8,7 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ('title', 'content')
     fieldsets = [
         (None, {'fields': ['title', 'content', 'committee']}),
-        ('Metadata', { 'fields': ['created_at', 'slug'] })
+        ('Metadata', { 'fields': ['created_at'] })
     ]
-    prepopulated_fields = {'slug': ('title',)}
 
 admin.site.register(Post, PostAdmin)

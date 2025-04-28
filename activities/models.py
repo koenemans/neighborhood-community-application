@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.text import slugify
 from django.contrib.auth.models import Group
 
 class Activity(models.Model):
@@ -16,6 +17,11 @@ class Activity(models.Model):
     committee = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='activities')
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.group.name)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
