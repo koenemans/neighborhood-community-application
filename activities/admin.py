@@ -7,7 +7,7 @@ class ActivityAdmin(admin.ModelAdmin):
     list_filter = ('start', 'end')
     search_fields = ('title', 'content', 'location')
     fieldsets = [
-        (None, {'fields': ['title', 'content']}),
+        (None, {'fields': ['title', 'content', 'committee']}),
         ('Practical Information', { 'fields': ['location', 'start', 'end'] }),
         ('Metadata', { 'fields': ['created_at'] })
     ]

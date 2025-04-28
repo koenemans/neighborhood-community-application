@@ -7,7 +7,7 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ('created_at', 'updated_at')
     search_fields = ('title', 'content')
     fieldsets = [
-        (None, {'fields': ['title', 'content']}),
+        (None, {'fields': ['title', 'content', 'committee']}),
         ('Metadata', { 'fields': ['created_at'] })
     ]
 
