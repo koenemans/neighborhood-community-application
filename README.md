@@ -15,14 +15,14 @@ This project aims to create a centralized, easy-to-use web application designed 
 ### 1. Public Community Page
 A publicly accessible area that displays:
 - News updates from various neighborhood committees
-- Announcements about upcoming events and activities
-- Posters, flyers (PDFs), and event photos
+- Announcements about upcoming events and activities hosted by various neighborhood committees
+- Posters, flyers (PDFs), event photos and public documents
 
 ### 2. Content Management Portal (Admin Area)
 A secure area for committee members to:
 - Create and publish news posts
 - Announce and manage activities
-- Upload documents (PDFs, images)
+- Upload files
 
 The idea is to use builtin Django Groups (committees) and Users (committee members).
 
@@ -36,10 +36,11 @@ News articles can be linked to specific activity announcements to create a conne
 Committees can upload:
 - Event photos
 - Flyers or posters (PDF format)
+- Public documents presented by the board
 
 ### 6. Archive Access
 An archive view allows users to:
-- Browse content organized by **year and month** (EDIT: maybe add organization by **committee** as well)
+- Browse content organized by **year month and committee**
 - Access past news and event history
 
 ---
