@@ -2,12 +2,13 @@ from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
 from django.contrib.auth.models import Group
+from committees.models import Committee
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     content = models.TextField()
-    committee = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='news')
+    committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name='news')
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
