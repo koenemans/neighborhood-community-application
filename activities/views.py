@@ -25,7 +25,7 @@ class ActivitiesArchiveView(base.TemplateView):
         for activity in all_activities:
             year = activity.start.year
             month = activity.start.strftime('%B')  # Get month name
-            committee = activity.committee.name if activity.committee else "No Committee"
+            committee = activity.committee.group.name if activity.committee else "No Committee"
 
             grouped_activities.setdefault(year, {}).setdefault(month, {}).setdefault(committee, []).append(activity)
 
