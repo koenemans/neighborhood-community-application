@@ -1,6 +1,9 @@
-from django.views.generic import ListView, DetailView, base
+from django.views.generic import ListView, DetailView, base, TemplateView
 
 from .models import Post
+
+class HomePageView(TemplateView):
+    template_name = 'home.html'
 
 class IndexView(ListView):
     template_name = 'news/index.html'

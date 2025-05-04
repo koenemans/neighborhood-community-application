@@ -1,9 +1,14 @@
-{% if upcoming_activity_list %}
-    <ul>
-    {% for activity in upcoming_activity_list %}
-        <li><a href="{% url 'activities:detail' activity.slug %}">{{ activity.title }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No activities available.</p>
-{% endif %}
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if upcoming_activity_list %}
+        <h1>Upcoming Activities</h1>
+        <ul>
+        {% for activity in upcoming_activity_list %}
+            <li><a href="{% url 'activities:detail' activity.slug %}">{{ activity.title }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No upcoming activities.</p>
+    {% endif %}
+{% endblock %}

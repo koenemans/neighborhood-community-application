@@ -1,8 +1,12 @@
-{% if post %}
-    <h1>{{ post.title }}</h1>
-    <p>Published: <time>{{ post.created_at }}</time></p>
-    <p>Committee: {{ post.committee }}</p>
-    <p>{{ post.content }}</p>
-{% else %}
-    <p>News post no longer available.</p>
-{% endif %}
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if post %}
+        <h1>{{ post.title }}</h1>
+        <p>Published: <time>{{ post.created_at }}</time></p>
+        <p>Committee: {{ post.committee }}</p>
+        <p>{{ post.content }}</p>
+    {% else %}
+        <p>News post no longer available.</p>
+    {% endif %}
+{% endblock %}
