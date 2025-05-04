@@ -9,6 +9,7 @@ class ActivityAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['title', 'content', 'committee']}),
         ('Practical Information', { 'fields': ['location', 'start', 'end'] }),
+        ('Image', {'fields': ['poster']}),
         ('Metadata', { 'fields': ['created_at'] })
     ]
     

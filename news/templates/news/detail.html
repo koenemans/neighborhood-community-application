@@ -2,6 +2,13 @@
 
 {% block content %}
     {% if post %}
+        <div>
+            {% if post.poster %}
+                <img src="{{ post.poster.url }}" alt="{{ post.title }}" style="max-width: 500px; height: auto;">
+            {% else %}
+                <p>No poster available for this news post.</p>
+            {% endif %}
+        </div>
         <h1>{{ post.title }}</h1>
         <p>Published: <time>{{ post.created_at }}</time></p>
         <p>Committee: {{ post.committee }}</p>
