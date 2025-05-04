@@ -14,6 +14,7 @@ class Activity(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField()
     location = models.CharField(max_length=200)
+    poster = models.ImageField(upload_to='posters/', blank=True, null=True)
     committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name='activities')
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)

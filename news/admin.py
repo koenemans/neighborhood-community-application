@@ -8,6 +8,7 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ('title', 'content')
     fieldsets = [
         (None, {'fields': ['title', 'content', 'committee']}),
+        ('Image', {'fields': ['poster']}),
         ('Metadata', { 'fields': ['created_at'] })
     ]
 
