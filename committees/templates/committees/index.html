@@ -1,6 +1,10 @@
-<h1>Committees</h1>
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Committees</h1>
     <ul>
     {% for committee in committee_list %}
         <li><a href="{% url 'committees:detail' committee.slug %}">{{ committee.group }}</a></li>
     {% endfor %}
     </ul>
+{% endblock %}

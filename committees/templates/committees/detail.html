@@ -1,4 +1,8 @@
-<h1>{{ committee.group }}</h1>
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ committee.group }}</h1>
     <p>Email: {{ committee.email }}</p>
     <p>Contact person: {{ committee.contact_person }}</p>
     <p>{{ committee.description }}</p>
+{% endblock %}
