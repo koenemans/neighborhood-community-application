@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <p>
+    Welcome to the Neighborhood Community Application! This is a platform where you can find information about local news, activities, and committees.
+    <br>
+    <a href="{% url 'news:index' %}">Check out the latest news</a> or <a href="{% url 'activities:index' %}">explore upcoming activities</a>.
+    <br>
+    If you're interested in getting involved, <a href="{% url 'committees:index' %}">learn more about our committees</a>.
+    <br>
+  </p>
+{% endblock %}
