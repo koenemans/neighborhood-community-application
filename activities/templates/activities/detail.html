@@ -2,6 +2,13 @@
 
 {% block content %}
     {% if activity %}
+        <div>
+            {% if activity.poster %}
+                <img src="{{ activity.poster.url }}" alt="{{ activity.title }}" style="max-width: 500px; height: auto;">
+            {% else %}
+                <p>No poster available for this activity.</p>
+            {% endif %}
+        </div>
         <h1>{{ activity.title }}</h1>
         <p>Start: <time>{{ activity.start }}</time></p>
         <p>End: <time>{{ activity.end }}</time></p>
