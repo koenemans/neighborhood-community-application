@@ -4,27 +4,28 @@
     {% if activity %}
         {{ activity.title }}
     {% else %}
-        Activitiy
+        Activity
     {% endif %}
 {% endblock %}
 
 {% block content %}
-    <article>
-        {% if activity %}
-            <header>
-                <h1>{{ activity.title }}</h1>
-                {% if activity.poster %}
-                    <img src="{{ activity.poster.url }}" alt="{{ activity.title }}" style="max-width: 500px; height: auto;">
-                {% else %}
-                    <p>No poster available for this activity.</p>
-                {% endif %}
-                <p>Start: <time>{{ activity.start }}</time>, End: <time>{{ activity.end }}</time></p>
-                <p>Location: {{ activity.location }}</p>
-                <p>Committee: {{ activity.committee }}</p>
-            </header>
-            <p>{{ activity.content }}</p>
+  <article>
+    {% if activity %}
+      <header>
+        <h1>{{ activity.title }}</h1>
+        {% if activity.poster %}
+          <img src="{{ activity.poster.url }}" alt="Poster for {{ activity.title }}" style="max-width: 500px; height: auto;">
         {% else %}
-            <p>Activity no longer available.</p>
+          <p>No poster available for this activity.</p>
         {% endif %}
-    </article>
+        <p>Start: <time datetime="{{ activity.start|date:'Y-m-d' }}">{{ activity.start|date:'F j, Y, g:i a' }}</time></p>
+        <p>End: <time datetime="{{ activity.end|date:'Y-m-d' }}">{{ activity.end|date:'F j, Y, g:i a' }}</time></p>
+        <p>Location: {{ activity.location }}</p>
+        <p>Committee: {{ activity.committee }}</p>
+      </header>
+      <p>{{ activity.content }}</p>
+    {% else %}
+      <p>Activity no longer available.</p>
+    {% endif %}
+  </article>
 {% endblock %}

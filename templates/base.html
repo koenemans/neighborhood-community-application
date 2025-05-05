@@ -10,7 +10,7 @@
     <a href="{% block heading-link %}/{% endblock %}">
         <h1>Neighborhood Community</h1>
     </a>
-    <nav>
+    <nav aria-label="Main Navigation">
       {% block nav %}
       <ul>
         <li><a href="{% url 'news:index' %}">News</a></li>
@@ -26,7 +26,9 @@
   </main>
   <footer>
     {% block footer %}
+      <p>
         <small>&copy; {% now "Y" %} Neighborhood Community. All rights reserved.</small>
+      </p>
     {% endblock %}
   </footer>
 </body>
