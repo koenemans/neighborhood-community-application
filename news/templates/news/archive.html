@@ -4,37 +4,45 @@
 
 {% block content %}
   <h1>News Archive</h1>
+
   <nav>
     <h4>Filter by Committee</h4>
     <ul>
-      {% for year, months in grouped_news.items %}
-        {% for month, committees in months.items %}
-          {% for committee, news in committees.items %}
-            <li>
-              <a href="{% url 'news:archive' %}?committee={{ committee.slug }}">
-                {{ committee.group.name }}
-              </a>
-            </li>
-          {% endfor %}
-        {% endfor %}
+      {% for committee in all_committees %}
+        <li>
+          <a href="{% url 'news:archive' %}?committee={{ committee.slug }}">
+            {{ committee.group.name }}
+          </a>
+        </li>
       {% endfor %}
     </ul>
+    {% if filtered_committee %}
+      <p>
+        <a href="{% url 'news:archive' %}">Remove Filter</a>
+      </p>
+    {% endif %}
   </nav>
+
+  <h2>
+    {% if filtered_committee %}
+      News for {{ filtered_committee.group.name }}
+    {% else %}
+      News for All Committees
+    {% endif %}
+  </h2>
+
   {% for year, months in grouped_news.items %}
     <h2>{{ year }}</h2>
-    {% for month, committees in months.items %}
+    {% for month, news in months.items %}
       <h3>{{ month }}</h3>
-      {% for committee, news in committees.items %}
-        <h4><a href="{% url 'committees:detail' committee.slug %}">{{ committee.group.name }}</a></h4>
-        <ul>
-          {% for post in news %}
-            <li>
-              <h5><a href="{% url 'news:detail' post.slug %}">{{ post.title }}</a></h5>
-              <p>{{ post.created_at|date:"F j, Y" }}</p>
-            </li>
-          {% endfor %}
-        </ul>
-      {% endfor %}
+      <ul>
+        {% for post in news %}
+          <li>
+            <h5><a href="{% url 'news:detail' post.slug %}">{{ post.title }}</a></h5>
+            <p>{{ post.created_at|date:"F j, Y" }}</p>
+          </li>
+        {% endfor %}
+      </ul>
     {% endfor %}
   {% endfor %}
 {% endblock %}
