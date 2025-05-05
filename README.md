@@ -1,6 +1,6 @@
 # 🏡 Neighborhood Community Web Application
 
-A web-based platform designed to help neighborhood communities share news, activities, and events in one centralized space. This application aims to improve communication between residents and local committees while building a stronger sense of community.
+A web-based platform designed to help neighborhood communities share news and activities in one centralized space. This application aims to improve communication between residents and local committees while building a stronger sense of community.
 
 ---
 
@@ -15,33 +15,29 @@ This project aims to create a centralized, easy-to-use web application designed 
 ### 1. Public Community Page
 A publicly accessible area that displays:
 - News updates from various neighborhood committees
-- Announcements about upcoming events and activities hosted by various neighborhood committees
-- Posters, flyers (PDFs), event photos and public documents
+- Announcements about activities hosted by various neighborhood committees
+- Public documents presented by the general community board
 
 ### 2. Content Management Portal (Admin Area)
 A secure area for committee members to:
 - Create and publish news posts
 - Announce and manage activities
-- Upload files
+- Upload public accessible files
 
 The idea is to use builtin Django Groups (committees) and Users (committee members).
 
 ### 3. Targeted Content
-Posts are created by committee (e.g., adult, children, sports) to help residents find relevant content.
+News posts and events are created by committee (e.g., adult, children, sports) to help residents find relevant content.
 
-### 4. Linked News and Activities
-News articles can be linked to specific activity announcements to create a connected experience for users.
-
-### 5. Upload Functionality
+### 4. Upload Functionality
 Committees can upload:
-- Event photos
-- Flyers or posters (PDF format)
-- Public documents presented by the board
+- News and event posters linked to the publications
+- Public accessible documents
 
-### 6. Archive Access
+### 5. Archive Access
 An archive view allows users to:
-- Browse content organized by **year month and committee**
-- Access past news and event history
+- Browse content organized by **year and month**
+- Filtering above content by committee
 
 ---
 
