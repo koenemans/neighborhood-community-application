@@ -1,10 +1,14 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
-from django.contrib.auth.models import Group
 from committees.models import Committee
 
 class Post(models.Model):
+    class Meta:
+        verbose_name = 'Post'
+        verbose_name_plural = 'News'
+        ordering = ['-created_at'].reverse()
+
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     content = models.TextField()

@@ -8,7 +8,7 @@ class IndexView(ListView):
     context_object_name = 'upcoming_activity_list'
 
     def get_queryset(self):
-        return Activity.objects.order_by('-start')[:5]
+        return Activity.objects.all()[:5]
     
 class DetailView(DetailView):
     model = Activity
@@ -20,7 +20,7 @@ class ActivitiesArchiveView(base.TemplateView):
 
     def get_queryset(self):
         # Filter activities by committee if a query parameter is provided
-        queryset = Activity.objects.all().order_by('-created_at')
+        queryset = Activity.objects.all()
         committee_slug = self.request.GET.get('committee')
         if committee_slug:
             queryset = queryset.filter(committee__slug=committee_slug)
