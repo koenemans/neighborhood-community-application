@@ -3,13 +3,16 @@
 {% block title %}Neighborhood Community{% endblock %}
 
 {% block content %}
-  <p>
-    Welcome to the Neighborhood Community Application! This is a platform where you can find information about local news, activities, and committees.
-  </p>
-  <p>
-    <a href="{% url 'news:index' %}">Check out the latest news</a> or <a href="{% url 'activities:index' %}">explore upcoming activities</a>.
-  </p>
-  <p>
-    If you're interested in getting involved, <a href="{% url 'committees:index' %}">learn more about our committees</a>.
-  </p>
+  <header>
+    <p>Welcome to the Neighborhood Community Application!</p>
+    <p>This is a platform where you can find information about local news, activities, and committees.</p>
+  </header>
+  <section>
+    <p>
+      <a href="{% url 'news:index' %}">Check out the latest news</a> or <a href="{% url 'activities:index' %}">explore upcoming activities</a>.
+    </p>
+    <p>
+      If you're interested in getting involved, <a href="{% url 'committees:index' %}">learn more about our committees</a>.
+    </p>
+  </section>
 {% endblock %}

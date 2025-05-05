@@ -3,15 +3,23 @@
 {% block title %}Community News{% endblock %}
 
 {% block content %}
+  <header>
     <h1>Latest News</h1>
+  </header>
+  <section>
     {% if latest_posts_list %}
-        <ul>
+      <ul>
         {% for post in latest_posts_list %}
-            <li><a href="{% url 'news:detail' post.slug %}">{{ post.title }}</a></li>
+          <li>
+            <article>
+              <h2><a href="{% url 'news:detail' post.slug %}">{{ post.title }}</a></h2>
+            </article>
+          </li>
         {% endfor %}
-        </ul>
+      </ul>
     {% else %}
-        <p>No news posts available.</p>
+      <p>No news posts available.</p>
     {% endif %}
     <a href="{% url 'news:archive' %}">View News Archive</a>
+  </section>
 {% endblock %}

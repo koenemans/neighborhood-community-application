@@ -2,24 +2,42 @@
 
 {% block title %}
     {% if committee %}
-        {{ committee.group }}
+        {{ committee.group.name }}
     {% else %}
         Committee
     {% endif %}
 {% endblock %}
 
 {% block content %}
-    <h1>{{ committee.group }}</h1>
-    <p>Email: {{ committee.email }}</p>
-    <p>Contact person: {{ committee.contact_person }}</p>
-    <p>{{ committee.description }}</p>
-
-    <h2>Members</h2>
-    <ul>
-        {% for member in committee.group.user_set.all %}
-            <li>{{ member }} - <a href="mailto:{{ member.email }}">{{ member.email }}</a></li>
-        {% empty %}
-            <li>No members found.</li>
-        {% endfor %}
-    </ul>
+  <article>
+    {% if committee %}
+      <header>
+        <h1>{{ committee.group.name }}</h1>
+        <p>Email: <a href="mailto:{{ committee.email }}">{{ committee.email }}</a></p>
+        <p>Contact Person: {{ committee.contact_person.get_full_name }}</p>
+      </header>
+      <p>{{ committee.description }}</p>
+      <section>
+        <h2>Members</h2>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for member in committee.group.user_set.all %}
+              <tr>
+                <td>{{ member.get_full_name }}</td>
+                <td><a href="mailto:{{ member.email }}">{{ member.email }}</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </section>
+    {% else %}
+      <p>Committee not found.</p>
+    {% endif %}
+  </article>
 {% endblock %}

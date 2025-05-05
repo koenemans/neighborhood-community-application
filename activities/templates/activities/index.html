@@ -1,18 +1,27 @@
 {% extends 'base.html' %}
 
-{% block title %}Upcoming Activities{% endblock %}
+{% block title %}Activities{% endblock %}
 
 {% block content %}
+  <header>
     <h1>Upcoming Activities</h1>
+  </header>
+  <section>
     {% if upcoming_activity_list %}
-        <ul>
+      <ul>
         {% for activity in upcoming_activity_list %}
-            <li><a href="{% url 'activities:detail' activity.slug %}">{{ activity.title }}</a></li>
+          <li>
+            <article>
+              <h2><a href="{% url 'activities:detail' activity.slug %}">{{ activity.title }}</a></h2>
+              <p><time datetime="{{ activity.start|date:'Y-m-d' }}">{{ activity.start|date:'F j, Y, g:i a' }}</time></p>
+              <p>Location: {{ activity.location }}</p>
+            </article>
+          </li>
         {% endfor %}
-        </ul>
+      </ul>
     {% else %}
-        <p>No upcoming activities.</p>
+      <p>No upcoming activities available.</p>
     {% endif %}
-    <a href="{% url 'activities:archive' %}">View Activity Archive</a>
-
+    <a href="{% url 'activities:archive' %}">View Activities Archive</a>
+  </section>
 {% endblock %}
