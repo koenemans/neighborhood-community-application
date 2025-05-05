@@ -1,18 +1,35 @@
 {% extends 'base.html' %}
 
+{% block title %}News Archive{% endblock %}
+
 {% block content %}
   <h1>News Archive</h1>
-
+  <nav>
+    <h4>Filter by Committee</h4>
+    <ul>
+      {% for year, months in grouped_news.items %}
+        {% for month, committees in months.items %}
+          {% for committee, news in committees.items %}
+            <li>
+              <a href="{% url 'news:archive' %}?committee={{ committee.slug }}">
+                {{ committee.group.name }}
+              </a>
+            </li>
+          {% endfor %}
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  </nav>
   {% for year, months in grouped_news.items %}
     <h2>{{ year }}</h2>
     {% for month, committees in months.items %}
       <h3>{{ month }}</h3>
       {% for committee, news in committees.items %}
-        <h4>{{ committee }}</h4>
+        <h4><a href="{% url 'committees:detail' committee.slug %}">{{ committee.group.name }}</a></h4>
         <ul>
           {% for post in news %}
             <li>
-              <h5>{{ post.title }}</h5>
+              <h5><a href="{% url 'news:detail' post.slug %}">{{ post.title }}</a></h5>
               <p>{{ post.created_at|date:"F j, Y" }}</p>
             </li>
           {% endfor %}

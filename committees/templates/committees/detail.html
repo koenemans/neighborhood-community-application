@@ -1,8 +1,25 @@
 {% extends 'base.html' %}
 
+{% block title %}
+    {% if committee %}
+        {{ committee.group }}
+    {% else %}
+        Committee
+    {% endif %}
+{% endblock %}
+
 {% block content %}
     <h1>{{ committee.group }}</h1>
     <p>Email: {{ committee.email }}</p>
     <p>Contact person: {{ committee.contact_person }}</p>
     <p>{{ committee.description }}</p>
+
+    <h2>Members</h2>
+    <ul>
+        {% for member in committee.group.user_set.all %}
+            <li>{{ member }} - <a href="mailto:{{ member.email }}">{{ member.email }}</a></li>
+        {% empty %}
+            <li>No members found.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
