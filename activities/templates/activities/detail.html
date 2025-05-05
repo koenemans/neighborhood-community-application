@@ -18,8 +18,8 @@
         {% else %}
           <p>No poster available for this activity.</p>
         {% endif %}
-        <p>Start: <time datetime="{{ activity.start|date:'Y-m-d' }}">{{ activity.start|date:'F j, Y, g:i a' }}</time></p>
-        <p>End: <time datetime="{{ activity.end|date:'Y-m-d' }}">{{ activity.end|date:'F j, Y, g:i a' }}</time></p>
+        <p>Start: <time datetime="{{ activity.start|date:'Y-m-d' }}">{{ activity.start|date:'F j, Y,  H:i' }}</time></p>
+        <p>End: <time datetime="{{ activity.end|date:'Y-m-d' }}">{{ activity.end|date:'F j, Y,  H:i' }}</time></p>
         <p>Location: {{ activity.location }}</p>
         <p>Committee: {{ activity.committee }}</p>
       </header>
