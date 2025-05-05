@@ -42,7 +42,7 @@
                 <li>
                   <article>
                     <h5><a href="{% url 'activities:detail' activity.slug %}">{{ activity.title }}</a></h5>
-                    <p><time datetime="{{ activity.start|date:'Y-m-d' }}">{{ activity.start|date:'F j, Y, g:i a' }}</time></p>
+                    <p><time datetime="{{ activity.start|date:'Y-m-d' }}">{{ activity.start|date:'F j, Y,  H:i' }}</time></p>
                   </article>
                 </li>
               {% endfor %}

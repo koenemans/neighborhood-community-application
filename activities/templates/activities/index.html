@@ -13,7 +13,7 @@
           <li>
             <article>
               <h2><a href="{% url 'activities:detail' activity.slug %}">{{ activity.title }}</a></h2>
-              <p><time datetime="{{ activity.start|date:'Y-m-d' }}">{{ activity.start|date:'F j, Y, g:i a' }}</time></p>
+              <p><time datetime="{{ activity.start|date:'Y-m-d' }}">{{ activity.start|date:'F j, Y, H:i' }}</time></p>
               <p>Location: {{ activity.location }}</p>
             </article>
           </li>
