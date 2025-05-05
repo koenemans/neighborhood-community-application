@@ -13,6 +13,8 @@
           <li>
             <article>
               <h2><a href="{% url 'news:detail' post.slug %}">{{ post.title }}</a></h2>
+              <p>Published: <time datetime="{{ post.created_at|date:'Y-m-d' }}">{{ post.created_at|date:'F j, Y' }}</time></p>
+              <p>Committee: {{ post.committee }}</p>
             </article>
           </li>
         {% endfor %}
