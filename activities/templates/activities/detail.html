@@ -9,21 +9,22 @@
 {% endblock %}
 
 {% block content %}
-    {% if activity %}
-        <div>
-            {% if activity.poster %}
-                <img src="{{ activity.poster.url }}" alt="{{ activity.title }}" style="max-width: 500px; height: auto;">
-            {% else %}
-                <p>No poster available for this activity.</p>
-            {% endif %}
-        </div>
-        <h1>{{ activity.title }}</h1>
-        <p>Start: <time>{{ activity.start }}</time></p>
-        <p>End: <time>{{ activity.end }}</time></p>
-        <p>Location: {{ activity.location }}</p>
-        <p>Committee: {{ activity.committee }}</p>
-        <p>{{ activity.content }}</p>
-    {% else %}
-        <p>Activity no longer available.</p>
-    {% endif %}
+    <article>
+        {% if activity %}
+            <header>
+                <h1>{{ activity.title }}</h1>
+                {% if activity.poster %}
+                    <img src="{{ activity.poster.url }}" alt="{{ activity.title }}" style="max-width: 500px; height: auto;">
+                {% else %}
+                    <p>No poster available for this activity.</p>
+                {% endif %}
+                <p>Start: <time>{{ activity.start }}</time>, End: <time>{{ activity.end }}</time></p>
+                <p>Location: {{ activity.location }}</p>
+                <p>Committee: {{ activity.committee }}</p>
+            </header>
+            <p>{{ activity.content }}</p>
+        {% else %}
+            <p>Activity no longer available.</p>
+        {% endif %}
+    </article>
 {% endblock %}

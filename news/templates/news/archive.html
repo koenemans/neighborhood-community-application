@@ -5,8 +5,8 @@
 {% block content %}
   <h1>News Archive</h1>
 
-  <nav>
-    <h4>Filter by Committee</h4>
+  <aside>
+    <p>Filter by Committee:</p>
     <ul>
       {% for committee in all_committees %}
         <li>
@@ -21,28 +21,31 @@
         <a href="{% url 'news:archive' %}">Remove Filter</a>
       </p>
     {% endif %}
-  </nav>
+  </aside>
 
   <h2>
     {% if filtered_committee %}
       News for {{ filtered_committee.group.name }}
     {% else %}
-      News for All Committees
+      News by All Committees
     {% endif %}
   </h2>
 
   {% for year, months in grouped_news.items %}
-    <h2>{{ year }}</h2>
-    {% for month, news in months.items %}
-      <h3>{{ month }}</h3>
-      <ul>
-        {% for post in news %}
-          <li>
-            <h5><a href="{% url 'news:detail' post.slug %}">{{ post.title }}</a></h5>
-            <p>{{ post.created_at|date:"F j, Y" }}</p>
-          </li>
-        {% endfor %}
-      </ul>
-    {% endfor %}
+    <article>
+      <h3>{{ year }}</h3>
+      {% for month, news in months.items %}
+        <h4>{{ month }}</h4>
+        <ul>
+          {% for post in news %}
+            <li>
+              <h5><a href="{% url 'news:detail' post.slug %}">{{ post.title }}</a></h5>
+              <p>{{ post.created_at|date:"F j, Y" }}</p>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endfor %}
+      <hr />
+    </article>
   {% endfor %}
 {% endblock %}
