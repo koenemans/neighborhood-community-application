@@ -1,24 +1,48 @@
 {% extends 'base.html' %}
 
-{% block title %}Activity Archive{% endblock %}
+{% block title %}Activities Archive{% endblock %}
 
 {% block content %}
   <h1>Activities Archive</h1>
+
+  <nav>
+    <h4>Filter by Committee</h4>
+    <ul>
+      {% for committee in all_committees %}
+        <li>
+          <a href="{% url 'activities:archive' %}?committee={{ committee.slug }}">
+            {{ committee.group.name }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+    {% if filtered_committee %}
+      <p>
+        <a href="{% url 'activities:archive' %}">Remove Filter</a>
+      </p>
+    {% endif %}
+  </nav>
+
+  <h2>
+    {% if filtered_committee %}
+      Activities for {{ filtered_committee.group.name }}
+    {% else %}
+      Activities for All Committees
+    {% endif %}
+  </h2>
+
   {% for year, months in grouped_activities.items %}
     <h2>{{ year }}</h2>
-    {% for month, committees in months.items %}
+    {% for month, activities in months.items %}
       <h3>{{ month }}</h3>
-      {% for committee, activities in committees.items %}
-        <h4><a href="{% url 'committees:detail' committee.slug %}">{{ committee.group.name }}</a></h4>
-        <ul>
-          {% for activity in activities %}
-            <li>
-              <h5><a href="{% url 'activities:detail' activity.slug %}">{{ activity.title }}</a></h5>
-              <p>{{ activity.start|date:"F j, Y" }}</p>
-            </li>
-          {% endfor %}
-        </ul>
-      {% endfor %}
+      <ul>
+        {% for activity in activities %}
+          <li>
+            <h5><a href="{% url 'activities:detail' activity.slug %}">{{ activity.title }}</a></h5>
+            <p>{{ activity.created_at|date:"F j, Y" }}</p>
+          </li>
+        {% endfor %}
+      </ul>
     {% endfor %}
   {% endfor %}
 {% endblock %}
