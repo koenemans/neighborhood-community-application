@@ -3,9 +3,10 @@
 {% block title %}Activities Archive{% endblock %}
 
 {% block content %}
-  <h1>Activities Archive</h1>
-
-  <aside>
+  <header>
+    <h1>Activities Archive</h1>
+  </header>
+  <nav aria-label="Filter by Committee">
     <p>Filter by Committee:</p>
     <ul>
       {% for committee in all_committees %}
@@ -21,31 +22,34 @@
         <a href="{% url 'activities:archive' %}">Remove Filter</a>
       </p>
     {% endif %}
-  </aside>
-
-  <h2>
-    {% if filtered_committee %}
-      Activities for {{ filtered_committee.group.name }}
-    {% else %}
-      Activities by All Committees
-    {% endif %}
-  </h2>
-
-  {% for year, months in grouped_activities.items %}
-    <article>
-      <h3>{{ year }}</h3>
-      {% for month, activities in months.items %}
-        <h4>{{ month }}</h4>
-        <ul>
-          {% for activity in activities %}
-            <li>
-              <h5><a href="{% url 'activities:detail' activity.slug %}">{{ activity.title }}</a></h5>
-              <p>{{ activity.created_at|date:"F j, Y" }}</p>
-            </li>
-          {% endfor %}
-        </ul>
-      {% endfor %}
-      <hr />
-    </article>
-  {% endfor %}
+  </nav>
+  <section>
+    <h2>
+      {% if filtered_committee %}
+        Activities by {{ filtered_committee.group.name }}
+      {% else %}
+        Activities by All Committees
+      {% endif %}
+    </h2>
+    {% for year, months in grouped_activities.items %}
+      <section>
+        <h3>{{ year }}</h3>
+        {% for month, activities in months.items %}
+          <section>
+            <h4>{{ month }}</h4>
+            <ul>
+              {% for activity in activities %}
+                <li>
+                  <article>
+                    <h5><a href="{% url 'activities:detail' activity.slug %}">{{ activity.title }}</a></h5>
+                    <p><time datetime="{{ activity.start|date:'Y-m-d' }}">{{ activity.start|date:'F j, Y, g:i a' }}</time></p>
+                  </article>
+                </li>
+              {% endfor %}
+            </ul>
+          </section>
+        {% endfor %}
+      </section>
+    {% endfor %}
+  </section>
 {% endblock %}

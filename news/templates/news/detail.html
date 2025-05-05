@@ -9,21 +9,21 @@
 {% endblock %}
 
 {% block content %}
-    <article>
-        {% if post %}
-            <header>
-                <h1>{{ post.title }}</h1>
-                {% if post.poster %}
-                    <img src="{{ post.poster.url }}" alt="{{ post.title }}" style="max-width: 500px; height: auto;">
-                {% else %}
-                    <p>No poster available for this news post.</p>
-                {% endif %}
-                <p>Published: <time>{{ post.created_at }}</time></p>
-                <p>Committee: {{ post.committee }}</p>
-            </header>
-            <p>{{ post.content }}</p>
+  <article>
+    {% if post %}
+      <header>
+        <h1>{{ post.title }}</h1>
+        {% if post.poster %}
+          <img src="{{ post.poster.url }}" alt="Poster for {{ post.title }}" style="max-width: 500px; height: auto;">
         {% else %}
-            <p>News post no longer available.</p>
+          <p>No poster available for this news post.</p>
         {% endif %}
-    </article>
+        <p>Published: <time datetime="{{ post.created_at|date:'Y-m-d' }}">{{ post.created_at|date:'F j, Y' }}</time></p>
+        <p>Committee: {{ post.committee }}</p>
+      </header>
+      <p>{{ post.content }}</p>
+    {% else %}
+      <p>News post no longer available.</p>
+    {% endif %}
+  </article>
 {% endblock %}

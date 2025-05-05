@@ -3,14 +3,23 @@
 {% block title %}Committees{% endblock %}
 
 {% block content %}
+  <header>
     <h1>Committees</h1>
+  </header>
+  <section>
     {% if committee_list %}
-        <ul>
+      <ul>
         {% for committee in committee_list %}
-            <li><a href="{% url 'committees:detail' committee.slug %}">{{ committee.group }}</a></li>
+          <li>
+            <article>
+              <h2><a href="{% url 'committees:detail' committee.slug %}">{{ committee.group.name }}</a></h2>
+              <p>{{ committee.description|truncatewords:20 }}</p>
+            </article>
+          </li>
         {% endfor %}
-        </ul>
+      </ul>
     {% else %}
-        <p>No committees available.</p>
+      <p>No committees available.</p>
     {% endif %}
+  </section>
 {% endblock %}
