@@ -7,6 +7,7 @@ class Activity(models.Model):
     class Meta:
         verbose_name = 'Activity'
         verbose_name_plural = 'Activities'
+        ordering = ['-start'].reverse()
         
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)

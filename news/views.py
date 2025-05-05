@@ -11,7 +11,7 @@ class IndexView(ListView):
     context_object_name = 'latest_posts_list'
 
     def get_queryset(self):
-        return Post.objects.order_by('-created_at')[:5]
+        return Post.objects.all()[:5]
     
 class DetailView(DetailView):
     model = Post
@@ -23,7 +23,7 @@ class NewsArchiveView(base.TemplateView):
 
     def get_queryset(self):
         # Filter posts by committee if a query parameter is provided
-        queryset = Post.objects.all().order_by('-created_at')
+        queryset = Post.objects.all()
         committee_slug = self.request.GET.get('committee')
         if committee_slug:
             queryset = queryset.filter(committee__slug=committee_slug)
