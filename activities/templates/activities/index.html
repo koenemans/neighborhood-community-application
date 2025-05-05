@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
+{% block title %}Upcoming Activities{% endblock %}
+
 {% block content %}
+    <h1>Upcoming Activities</h1>
     {% if upcoming_activity_list %}
-        <h1>Upcoming Activities</h1>
         <ul>
         {% for activity in upcoming_activity_list %}
             <li><a href="{% url 'activities:detail' activity.slug %}">{{ activity.title }}</a></li>
@@ -11,4 +13,6 @@
     {% else %}
         <p>No upcoming activities.</p>
     {% endif %}
+    <a href="{% url 'activities:archive' %}">View Activity Archive</a>
+
 {% endblock %}
