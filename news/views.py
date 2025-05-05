@@ -28,7 +28,7 @@ class NewsArchiveView(base.TemplateView):
         for post in all_news:
             year = post.created_at.year
             month = post.created_at.strftime('%B')  # Get month name
-            committee = post.committee.group.name if post.committee else "No Committee"
+            committee = post.committee if post.committee else "No Committee"
 
             grouped_news.setdefault(year, {}).setdefault(month, {}).setdefault(committee, []).append(post)
 

@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 
+{% block title %}
+    {% if activity %}
+        {{ activity.title }}
+    {% else %}
+        Activitiy
+    {% endif %}
+{% endblock %}
+
 {% block content %}
     {% if activity %}
         <div>
