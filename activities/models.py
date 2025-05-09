@@ -8,7 +8,7 @@ from django.core.exceptions import ValidationError
 def start_date_not_in_past(date):
     if date < timezone.now():
         raise ValidationError(
-             _("Invalid date: %(date)s"),
+             "Start date: %(date)s cannot be in the past",
              code='invalid',
              params={'date': date},
         )
@@ -29,7 +29,7 @@ class Activity(models.Model):
     committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name='activities')
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
-
+    
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
@@ -40,4 +40,3 @@ class Activity(models.Model):
 
     def __str__(self):
         return self.title
-
