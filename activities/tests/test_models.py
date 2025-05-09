@@ -32,8 +32,8 @@ class ActivityModelFieldTest(TestCase):
             location="Test Location",
             committee=self.committee
         )
-        with self.assertRaises(Exception):
-            activity.full_clean()  # This will raise a ValidationError
+        with self.assertRaises(ValidationError):
+            activity.full_clean()
 
 class ActivityModelRelationshipTest(TestCase):
     def setUp(self):
@@ -193,8 +193,7 @@ class ActivityModelStartDate(TestCase):
 
     def test_start_in_past(self):
         start = timezone.now() - datetime.timedelta(days=1)
-        with self.assertRaises(ValidationError):
-            Activity.objects.create(
+        activity = Activity(
                 title="Test Activity",
                 slug="test-activity",
                 content="Test content",
@@ -203,10 +202,13 @@ class ActivityModelStartDate(TestCase):
                 location="Test Location",
                 committee=self.committee
             )
+        with self.assertRaises(ValidationError):
+            activity.full_clean()
+       
 
     def test_start_in_future(self):
         start = timezone.now() + datetime.timedelta(days=1)
-        activity = Activity.objects.create(
+        activity = Activity(
             title="Test Activity",
             slug="test-activity",
             content="Test content",
@@ -233,7 +235,7 @@ class ActivityModelEndDate(TestCase):
     def test_end_after_start(self):
         start = timezone.now()
         end = start + datetime.timedelta(hours=2)
-        activity = Activity.objects.create(
+        activity = Activity(
             title="Test Activity",
             slug="test-activity",
             content="Test content",
@@ -244,30 +246,31 @@ class ActivityModelEndDate(TestCase):
         )
         self.assertEqual(activity.end, end)
 
-    def test_end_before_start(self):
-        start = timezone.now()
-        end = start - datetime.timedelta(hours=2)
-        with self.assertRaises(ValidationError):
-            Activity.objects.create(
-                title="Test Activity",
-                slug="test-activity",
-                content="Test content",
-                start=start,
-                end=end,
-                location="Test Location",
-                committee=self.committee
-            )
-
     def test_end_same_as_start(self):
         start = timezone.now()
         end = start
+        activity = Activity(
+            title="Test Activity",
+            slug="test-activity",
+            content="Test content",
+            start=start,
+            end=end,
+            location="Test Location",
+            committee=self.committee
+        )
+        self.assertEqual(activity.end, start)
+
+    def test_end_before_start(self):
+        start = timezone.now()
+        end = start - datetime.timedelta(hours=2)
+        activity = Activity(
+            title="Test Activity",
+            slug="test-activity",
+            content="Test content",
+            start=start,
+            end=end,
+            location="Test Location",
+            committee=self.committee
+        )
         with self.assertRaises(ValidationError):
-            Activity.objects.create(
-                title="Test Activity",
-                slug="test-activity",
-                content="Test content",
-                start=start,
-                end=end,
-                location="Test Location",
-                committee=self.committee
-            )
+            activity.full_clean()
