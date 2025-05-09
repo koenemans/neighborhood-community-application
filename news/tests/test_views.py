@@ -60,6 +60,8 @@ class NewsIndexViewTest(TestCase):
         posts = response.context['latest_posts_list']
         self.assertEqual(posts[0], self.post2)  # Most recent post first
         self.assertEqual(posts[1], self.post1)  # Older post second
+        # Explicitly verify ordering is by created_at descending
+        self.assertTrue(posts[0].created_at >= posts[1].created_at)
 
 
 class NewsDetailViewTest(TestCase):
@@ -190,6 +192,10 @@ class NewsArchiveViewTest(TestCase):
         grouped_news = response.context['grouped_news']
         self.assertIn(2022, grouped_news)
         self.assertIn(2023, grouped_news)
+        
+        # Check months in 2023
+        self.assertIn('January', grouped_news[2023])
+        self.assertIn('February', grouped_news[2023])
         
         # Check committees in all_committees
         all_committees = response.context['all_committees']
