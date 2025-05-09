@@ -9,7 +9,7 @@ from activities.models import Activity
 class ActivityPermissionsTest(TestCase):
     def setUp(self):
         # Create staff user
-        self.user = User.objects.create_user(username="regular_user", email="regular@example.com", password="password")
+        self.user = User.objects.create_user(username="staff_user", email="staff@example.com", password="password")
         self.user.is_staff = True
         self.user.save()
 
@@ -45,15 +45,15 @@ class ActivityPermissionsTest(TestCase):
         response = self.client.get(create_url)
         self.assertNotEqual(response.status_code, 200)
         
-    def test_regular_user_in_committee_can_view_activity(self):
+    def test_anonymous_can_view_activity(self):
         """Test that anonymous users can view activities."""
         detail_url = reverse('activities:detail', kwargs={'slug': self.activity.slug})
         response = self.client.get(detail_url)
         self.assertEqual(response.status_code, 200)
         
-    def test_admin_can_create_activity(self):
-        """Test that regular committee users can create activities."""
-        self.client.login(username="regular_user", password="password")
+    def test_staff_can_create_activity(self):
+        """Test that staff users can create activities."""
+        self.client.login(username="staff_user", password="password")
         create_url = reverse('admin:activities_activity_add')
         response = self.client.get(create_url)
         self.assertEqual(response.status_code, 200)

@@ -42,9 +42,11 @@ class ActivitiesTemplateTest(TestCase):
         self.assertContains(response, "Test Activity Title")
         self.assertContains(response, "Test content with some formatting")
         self.assertContains(response, "Test Location")
+        self.assertContains(response, "Test Committee")  # Committee name should be displayed
         
     def test_archive_template_contains_filter_options(self):
         """Test that the archive template displays filter options."""
         response = self.client.get(reverse('activities:archive'))
         self.assertContains(response, "Filter by Committee")
         self.assertContains(response, "Test Committee")  # Committee name
+        self.assertContains(response, "Activities Archive")  # Page title

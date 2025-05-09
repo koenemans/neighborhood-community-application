@@ -29,15 +29,19 @@ class NewsTemplateTest(TestCase):
         """Test that the index template displays posts correctly."""
         response = self.client.get(reverse('news:index'))
         self.assertContains(response, "Test Post Title")
+        self.assertContains(response, "Test Committee")  # Committee name
+        self.assertContains(response, "Latest News")  # Page title
         
     def test_detail_template_displays_post_content(self):
         """Test that the detail template displays post content correctly."""
         response = self.client.get(reverse('news:detail', kwargs={'slug': self.post.slug}))
         self.assertContains(response, "Test Post Title")
-        self.assertContains(response, "Test content with &lt;strong&gt;HTML&lt;/strong&gt;") # Test content with <strong>HTML</strong>
+        self.assertContains(response, "Test content with &lt;strong&gt;HTML&lt;/strong&gt;")  # Test content with <strong>HTML</strong>
+        self.assertContains(response, "Test Committee")  # Committee name
         
     def test_archive_template_contains_filter_options(self):
         """Test that the archive template displays filter options."""
         response = self.client.get(reverse('news:archive'))
         self.assertContains(response, "Filter by Committee")
         self.assertContains(response, "Test Committee")  # Committee name
+        self.assertContains(response, "News Archive")  # Page title
