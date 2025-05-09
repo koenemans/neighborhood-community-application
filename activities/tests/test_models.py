@@ -23,6 +23,7 @@ class ActivityModelFieldTest(TestCase):
         )
 
     def test_title_max_length(self):
+        """Test that the title field has a max_length of 200."""
         activity = Activity(
             title="A" * 201,  # Exceeding max_length of 200
             slug="test-activity",
@@ -34,6 +35,19 @@ class ActivityModelFieldTest(TestCase):
         )
         with self.assertRaises(ValidationError):
             activity.full_clean()
+
+    def test_string_representation(self):
+        """Test the string representation of the activity."""
+        activity = Activity.objects.create(
+            title="Test String Activity",
+            slug="test-string-activity",
+            content="Test content",
+            start=timezone.now() + datetime.timedelta(hours=1),
+            end=timezone.now() + datetime.timedelta(hours=3),
+            location="Test Location",
+            committee=self.committee
+        )
+        self.assertEqual(str(activity), "Test String Activity")
 
 class ActivityModelRelationshipTest(TestCase):
     def setUp(self):
@@ -59,6 +73,7 @@ class ActivityModelRelationshipTest(TestCase):
         )
 
     def test_activity_belongs_to_committee(self):
+        """Test that the activity belongs to the correct committee."""
         self.assertEqual(self.activity.committee, self.committee)
 
 class ActivityModelGetAbsoluteUrlTest(TestCase):
@@ -85,6 +100,7 @@ class ActivityModelGetAbsoluteUrlTest(TestCase):
         )
 
     def test_get_absolute_url(self):
+        """Test that the get_absolute_url method returns the correct URL."""
         expected_url = f"/activities/{self.activity.slug}/"
         self.assertEqual(self.activity.get_absolute_url(), expected_url)
 
@@ -102,6 +118,7 @@ class ActivityModelSlugTest(TestCase):
         )
 
     def test_slug_generation(self):
+        """Test that the slug is generated correctly."""
         activity = Activity.objects.create(
             title="Test Activity",
             content="Test content",
@@ -146,6 +163,7 @@ class ActivityModelOrderingTest(TestCase):
         )
 
     def test_default_ordering(self):
+        """Test that activities are ordered by start date."""
         activities = Activity.objects.all()
         self.assertEqual(activities[0], self.activity2)  # First to start should be first
         self.assertEqual(activities[1], self.activity1)  # Second to start should be last
@@ -165,6 +183,7 @@ class ActivityModelPosterTest(TestCase):
         )
 
     def test_poster_upload(self):
+        """Test that the poster can be uploaded and saved correctly."""
         poster = SimpleUploadedFile("poster.jpg", b"file_content", content_type="image/jpeg")
         activity = Activity.objects.create(
             title="Test Activity",
@@ -192,6 +211,7 @@ class ActivityModelStartDate(TestCase):
         )
 
     def test_start_in_past(self):
+        """Test that the start date cannot be in the past."""
         start = timezone.now() - datetime.timedelta(days=1)
         activity = Activity(
                 title="Test Activity",
@@ -207,6 +227,7 @@ class ActivityModelStartDate(TestCase):
        
 
     def test_start_in_future(self):
+        """Test that the start date can be in the future."""
         start = timezone.now() + datetime.timedelta(days=1)
         activity = Activity(
             title="Test Activity",
@@ -233,6 +254,7 @@ class ActivityModelEndDate(TestCase):
         )
 
     def test_end_after_start(self):
+        """Test that the end date is after the start date."""
         start = timezone.now()
         end = start + datetime.timedelta(hours=2)
         activity = Activity(
@@ -247,6 +269,7 @@ class ActivityModelEndDate(TestCase):
         self.assertEqual(activity.end, end)
 
     def test_end_same_as_start(self):
+        """Test that the end date can be the same as the start date."""
         start = timezone.now()
         end = start
         activity = Activity(
@@ -261,6 +284,7 @@ class ActivityModelEndDate(TestCase):
         self.assertEqual(activity.end, start)
 
     def test_end_before_start(self):
+        """Test that the end date cannot be before the start date."""
         start = timezone.now()
         end = start - datetime.timedelta(hours=2)
         activity = Activity(

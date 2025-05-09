@@ -30,8 +30,13 @@ class ActivityAdminTest(TestCase):
         # Add user to committee group and give correct permissions
         view_activity_permission = Permission.objects.get(codename='view_activity')
         change_activity_permission = Permission.objects.get(codename='change_activity')
+        add_activity_permission = Permission.objects.get(codename='add_activity')
         self.group.user_set.add(self.user)
-        self.group.permissions.add(view_activity_permission, change_activity_permission)
+        self.group.permissions.add(
+            view_activity_permission, 
+            change_activity_permission,
+            add_activity_permission
+        )
         self.group.save()
         
         self.activity = Activity.objects.create(
@@ -56,3 +61,21 @@ class ActivityAdminTest(TestCase):
         response = self.client.get(reverse('admin:activities_activity_change', args=[self.activity.id]))
         self.assertContains(response, "Test Activity")
         self.assertContains(response, "Test content")
+        self.assertContains(response, "Test Location")
+        
+    def test_activity_admin_validation(self):
+        """Test that the admin form validates activity data."""
+        # Try to create an activity with end before start
+        invalid_data = {
+            'title': 'Invalid Activity',
+            'content': 'This activity has invalid dates',
+            'committee': self.committee.id,
+            'location': 'Test Location',
+            'start_0': '2023-05-05',  # Date
+            'start_1': '10:00:00',    # Time
+            'end_0': '2023-05-04',    # Earlier date
+            'end_1': '10:00:00',      # Time
+        }
+        response = self.client.post(reverse('admin:activities_activity_add'), data=invalid_data)
+        self.assertEqual(response.status_code, 200)  # Form displayed with errors
+        self.assertContains(response, "error")  # Error message displayed

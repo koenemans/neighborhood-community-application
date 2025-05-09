@@ -21,6 +21,7 @@ class PostModelFieldTest(TestCase):
         )
 
     def test_title_max_length(self):
+        """Test that the title field has a max_length of 200."""
         post = Post.objects.create(
             title="A" * 201,  # Exceeding max_length of 200
             slug="test-post",
@@ -51,6 +52,7 @@ class PostModelRelationshipTest(TestCase):
         )
 
     def test_post_belongs_to_committee(self):
+        """Test that the post belongs to the correct committee."""
         self.assertEqual(self.post.committee, self.committee)
 
 class PostModelGetAbsoluteUrlTest(TestCase):
@@ -74,6 +76,7 @@ class PostModelGetAbsoluteUrlTest(TestCase):
         )
 
     def test_get_absolute_url(self):
+        """Test that the get_absolute_url method returns the correct URL."""
         expected_url = f"/news/{self.post.slug}/"
         self.assertEqual(self.post.get_absolute_url(), expected_url)
 
@@ -91,6 +94,7 @@ class PostModelSlugTest(TestCase):
         )
 
     def test_slug_generation(self):
+        """Test that the slug is generated correctly from the title."""
         post = Post.objects.create(
             title="Test Post",
             content="Test content",
@@ -126,6 +130,7 @@ class PostModelOrderingTest(TestCase):
         )
 
     def test_default_ordering(self):
+        """Test that posts are ordered by created_at in descending order."""
         posts = Post.objects.all()
         self.assertEqual(posts[0], self.post2)
         self.assertEqual(posts[1], self.post1)
@@ -145,6 +150,7 @@ class PostModelPosterTest(TestCase):
         )
 
     def test_poster_upload(self):
+        """Test that the poster field can accept an image file."""
         poster = SimpleUploadedFile("poster.jpg", b"file_content", content_type="image/jpeg")
         post = Post.objects.create(
             title="Test Post",
@@ -154,3 +160,26 @@ class PostModelPosterTest(TestCase):
             poster=poster
         )
         self.assertTrue(post.poster.name.startswith("poster"))
+
+class PostModelStringRepresentation(TestCase):
+    def setUp(self):
+        user = User.objects.create_user(username="testuser", email="user@example.com", password="password")
+        group = Group.objects.create(name="Test Committee")
+
+        self.committee = Committee.objects.create(
+            group=group,
+            slug="test-committee",
+            description="A test committee",
+            contact_person=user,
+            email="test@example.com"
+        )
+
+    def test_string_representation(self):
+        """Test the string representation of a post."""
+        post = Post.objects.create(
+            title="Test Post Title",
+            slug="test-post",
+            content="Test content",
+            committee=self.committee
+        )
+        self.assertEqual(str(post), "Test Post Title")
