@@ -9,7 +9,7 @@ class PostAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['title', 'content', 'committee']}),
         ('Image', {'fields': ['poster']}),
-        ('Attachment', {'fields': ['attachement']}),
+        ('Attachment', {'fields': ['attachment']}),
         ('Metadata', { 'fields': ['created_at'] })
     ]
 
