@@ -6,6 +6,7 @@ from django.contrib.auth.models import User,Group
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import override_settings
 import tempfile
+import re
 
 class PostModelFieldTest(TestCase):
     def setUp(self):
@@ -159,7 +160,11 @@ class PostModelPosterTest(TestCase):
             committee=self.committee,
             poster=poster
         )
-        self.assertTrue(post.poster.name.startswith("poster"))
+        year = post.created_at.strftime("%Y")
+        month = post.created_at.strftime("%m")
+        day = post.created_at.strftime("%d")
+        file_hash = re.search(r'\_(.*?)\.', post.poster.name).group(1)
+        self.assertEqual(post.poster.name, f'news/posters/{year}/{month}/{day}/poster_{file_hash}.jpg')
 
 class PostModelStringRepresentation(TestCase):
     def setUp(self):

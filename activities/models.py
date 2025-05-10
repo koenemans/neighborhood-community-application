@@ -25,7 +25,7 @@ class Activity(models.Model):
     start = models.DateTimeField(validators=[start_date_not_in_past])
     end = models.DateTimeField()
     location = models.CharField(max_length=200)
-    poster = models.ImageField(upload_to='posters/', blank=True, null=True)
+    poster = models.ImageField(upload_to='activities/posters/%Y/%m/%d/', blank=True, null=True)
     committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name='activities')
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
@@ -37,6 +37,9 @@ class Activity(models.Model):
 
     def get_absolute_url(self):
         return reverse('activities:detail', args=[self.slug])
+    
+    def has_poster(self):
+        return bool(self.poster)
 
     def __str__(self):
         return self.title
