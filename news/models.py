@@ -14,7 +14,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     content = models.TextField()
     poster = models.ImageField(upload_to='news/posters/%Y/%m/%d/', blank=True, null=True)
-    attachement = models.FileField(upload_to='news/attachments/%Y/%m/%d/', blank=True, null=True)
+    attachment = models.FileField(upload_to='news/attachments/%Y/%m/%d/', blank=True, null=True)
     committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name='news')
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)

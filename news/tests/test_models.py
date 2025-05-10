@@ -166,6 +166,36 @@ class PostModelPosterTest(TestCase):
         file_hash = re.search(r'\_(.*?)\.', post.poster.name).group(1)
         self.assertEqual(post.poster.name, f'news/posters/{year}/{month}/{day}/poster_{file_hash}.jpg')
 
+@override_settings(MEDIA_ROOT=tempfile.gettempdir())
+class PostModelAttachmentTest(TestCase):
+    def setUp(self):
+        user = User.objects.create_user(username="testuser", email="user@example.com", password="password")
+        group = Group.objects.create(name="Test Committee")
+
+        self.committee = Committee.objects.create(
+            group=group,
+            slug="test-committee",
+            description="A test committee",
+            contact_person=user,
+            email="test@example.com"
+        )
+
+    def test_attachment_upload(self):
+        """Test that the attachment can be uploaded and saved correctly."""
+        attachment = SimpleUploadedFile("document.pdf", b"file_content", content_type="application/pdf")
+        post = Post.objects.create(
+            title="Test Post",
+            slug="test-post",
+            content="Test content",
+            committee=self.committee,
+            attachment=attachment
+        )
+        year = post.created_at.strftime("%Y")
+        month = post.created_at.strftime("%m")
+        day = post.created_at.strftime("%d")
+        file_hash = re.search(r'\_(.*?)\.', post.attachment.name).group(1)
+        self.assertEqual(post.attachment.name, f'news/attachments/{year}/{month}/{day}/document_{file_hash}.pdf')
+
 class PostModelStringRepresentation(TestCase):
     def setUp(self):
         user = User.objects.create_user(username="testuser", email="user@example.com", password="password")
