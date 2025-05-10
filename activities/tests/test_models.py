@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.core.exceptions import ValidationError
 import tempfile
 import datetime
+import re
 
 class ActivityModelFieldTest(TestCase):
     def setUp(self):
@@ -195,7 +196,11 @@ class ActivityModelPosterTest(TestCase):
             committee=self.committee,
             poster=poster
         )
-        self.assertTrue(activity.poster.name.startswith("poster"))
+        year = activity.created_at.strftime("%Y")
+        month = activity.created_at.strftime("%m")
+        day = activity.created_at.strftime("%d")
+        file_hash = re.search(r'\_(.*?)\.', activity.poster.name).group(1)
+        self.assertEqual(activity.poster.name, f'activities/posters/{year}/{month}/{day}/poster_{file_hash}.jpg')
 
 class ActivityModelStartDate(TestCase):
     def setUp(self):
