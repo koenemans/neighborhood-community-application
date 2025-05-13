@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Activities{% endblock %}
+{% block title %}{% trans "Activities" %}{% endblock %}
 
 {% block content %}
   <header>
-    <h1>Upcoming Activities</h1>
+    <h1>{% trans "Upcoming Activities" %}</h1>
   </header>
   <section>
     {% if upcoming_activity_list %}
@@ -14,14 +15,14 @@
             <article>
               <h2><a href="{% url 'activities:detail' activity.slug %}">{{ activity.title }}</a></h2>
               <p><time datetime="{{ activity.start|date:'Y-m-d' }}">{{ activity.start|date:'F j, Y, H:i' }}</time></p>
-              <p>Location: {{ activity.location }}</p>
+              <p>{%trans "Location" %}: {{ activity.location }}</p>
             </article>
           </li>
         {% endfor %}
       </ul>
     {% else %}
-      <p>No upcoming activities available.</p>
+      <p>{% trans "No upcoming activities available." %}</p>
     {% endif %}
-    <a href="{% url 'activities:archive' %}">View Activities Archive</a>
+    <a href="{% url 'activities:archive' %}">{% trans "View Activities Archive" %}</a>
   </section>
 {% endblock %}

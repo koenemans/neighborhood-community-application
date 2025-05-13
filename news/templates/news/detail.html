@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}
     {% if post %}
         {{ post.title }}
     {% else %}
-        News Post
+        {% trans "News Post" %}
     {% endif %}
 {% endblock %}
 
@@ -14,16 +15,16 @@
       <header>
         <h1>{{ post.title }}</h1>
         {% if post.poster %}
-          <img src="{{ post.poster.url }}" alt="Poster for {{ post.title }}" style="max-width: 500px; height: auto;">
+          <img src="{{ post.poster.url }}" alt="{% trans "Poster for" %} {{ post.title }}" style="max-width: 500px; height: auto;">
         {% else %}
-          <p>No poster available for this news post.</p>
+          <p>{% trans "No poster available for this news post." %}</p>
         {% endif %}
-        <p>Published: <time datetime="{{ post.created_at|date:'Y-m-d' }}">{{ post.created_at|date:'F j, Y' }}</time></p>
-        <p>Committee: {{ post.committee }}</p>
+        <p>{% trans "Published" %}: <time datetime="{{ post.created_at|date:'Y-m-d' }}">{{ post.created_at|date:'F j, Y' }}</time></p>
+        <p>{% trans "Committee" %}: {{ post.committee }}</p>
       </header>
       <p>{{ post.content }}</p>
     {% else %}
-      <p>News post no longer available.</p>
+      <p>{% trans "News post no longer available." %}</p>
     {% endif %}
   </article>
 {% endblock %}
