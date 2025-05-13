@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-13 20:05+0200\n"
+"POT-Creation-Date: 2025-05-13 21:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: activities/admin.py:13
 msgid "Practical Information"
 msgstr "Praktische informatie"
@@ -43,7 +44,7 @@ msgstr "Start datum: %(date)s kan niet in het verleden zijn"
 msgid "Activity"
 msgstr "Activiteit"
 
-#: activities/models.py:19
+#: activities/models.py:19 activities/templates/activities/index.html:4
 msgid "Activities"
 msgstr "Activiteiten"
 
@@ -78,3 +79,77 @@ msgstr "aangemaakt op"
 #: activities/models.py:31
 msgid "updated at"
 msgstr "gewijzigd op"
+
+#: activities/templates/activities/archive.html:4
+#: activities/templates/activities/archive.html:8
+#, fuzzy
+#| msgid "Activities"
+msgid "Activities Archive"
+msgstr "Activiteiten"
+
+#: activities/templates/activities/archive.html:11
+msgid "Filter by Committee"
+msgstr "Filter op commissie"
+
+#: activities/templates/activities/archive.html:23
+msgid "Remove Filter"
+msgstr "Verwijder filter"
+
+#: activities/templates/activities/archive.html:30
+#, fuzzy
+#| msgid "Activities"
+msgid "Activities by"
+msgstr "Activiteiten door"
+
+#: activities/templates/activities/archive.html:32
+msgid "Activities by All Committees"
+msgstr "Activiteiten door alle commissies"
+
+#: activities/templates/activities/detail.html:18
+msgid "Poster for"
+msgstr "Poster voor"
+
+#: activities/templates/activities/detail.html:20
+msgid "No poster available for this activity."
+msgstr "Geen poster beschikbaar voor deze activiteit."
+
+#: activities/templates/activities/detail.html:22
+msgid "Start"
+msgstr "Start datum"
+
+#: activities/templates/activities/detail.html:23
+msgid "End"
+msgstr "Eind datum"
+
+#: activities/templates/activities/detail.html:24
+#: activities/templates/activities/index.html:18
+#, fuzzy
+#| msgid "location"
+msgid "Location"
+msgstr "Locatie"
+
+#: activities/templates/activities/detail.html:25
+#, fuzzy
+#| msgid "committee"
+msgid "Committee"
+msgstr "Commissie"
+
+#: activities/templates/activities/detail.html:29
+msgid "Activity no longer available."
+msgstr "Activiteit niet langer beschikbaar."
+
+#: activities/templates/activities/index.html:8
+#, fuzzy
+#| msgid "Activities"
+msgid "Upcoming Activities"
+msgstr "Aankomende activiteiten"
+
+#: activities/templates/activities/index.html:24
+msgid "No upcoming activities available."
+msgstr "Geen aankomende activiteiten."
+
+#: activities/templates/activities/index.html:26
+#, fuzzy
+#| msgid "Activities"
+msgid "View Activities Archive"
+msgstr "Ga naar het activiteiten archief"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-13 20:19+0200\n"
+"POT-Creation-Date: 2025-05-13 21:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: news/admin.py:12
 msgid "Image"
 msgstr "Afbeelding"
@@ -60,3 +61,69 @@ msgstr "aangemaakt op"
 #: news/models.py:21
 msgid "updated at"
 msgstr "gewijzigd op"
+
+#: news/templates/news/archive.html:4 news/templates/news/archive.html:8
+msgid "News Archive"
+msgstr "Nieuws Archief"
+
+#: news/templates/news/archive.html:11
+msgid "Filter by Committee:"
+msgstr "Filter op Commissie"
+
+#: news/templates/news/archive.html:23
+msgid "Remove Filter"
+msgstr "Verwijder filter"
+
+#: news/templates/news/archive.html:30
+#, fuzzy
+#| msgid "News"
+msgid "News by"
+msgstr "Nieuws van"
+
+#: news/templates/news/archive.html:32
+msgid "News by All Committees"
+msgstr "Nieuws van alle commissies"
+
+#: news/templates/news/detail.html:8
+#, fuzzy
+#| msgid "Post"
+msgid "News Post"
+msgstr "Nieuws Bericht"
+
+#: news/templates/news/detail.html:18
+msgid "Poster for"
+msgstr "Poster voor"
+
+#: news/templates/news/detail.html:20
+msgid "No poster available for this news post."
+msgstr "Geen poster beschikbaar voor dit nieuws bericht."
+
+#: news/templates/news/detail.html:22 news/templates/news/index.html:17
+msgid "Published"
+msgstr "Gepubliceerd"
+
+#: news/templates/news/detail.html:23 news/templates/news/index.html:18
+#, fuzzy
+#| msgid "committee"
+msgid "Committee"
+msgstr "Commissie"
+
+#: news/templates/news/detail.html:27
+msgid "News post no longer available."
+msgstr "Nieuws bericht niet langer beschikbaar."
+
+#: news/templates/news/index.html:4
+msgid "Community News"
+msgstr "Commissie Nieuws"
+
+#: news/templates/news/index.html:8
+msgid "Latest News"
+msgstr "Laatste Nieuws"
+
+#: news/templates/news/index.html:24
+msgid "No news posts available."
+msgstr "Geen nieuwe nieuws berichten beschikbaar."
+
+#: news/templates/news/index.html:26
+msgid "View News Archive"
+msgstr "Ga naar het Nieuws Archief"

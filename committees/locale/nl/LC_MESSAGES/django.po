@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-13 20:14+0200\n"
+"POT-Creation-Date: 2025-05-13 21:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: committees/models.py:9
+
+#: committees/models.py:9 committees/templates/committees/detail.html:8
 msgid "Committee"
 msgstr "Commissie"
 
-#: committees/models.py:10
+#: committees/models.py:10 committees/templates/committees/index.html:4
+#: committees/templates/committees/index.html:8
 msgid "Committees"
 msgstr "Commissies"
 
@@ -40,3 +42,34 @@ msgstr "contact persoon"
 #: committees/models.py:17
 msgid "email"
 msgstr "email adres"
+
+#: committees/templates/committees/detail.html:17
+#: committees/templates/committees/detail.html:27
+#, fuzzy
+#| msgid "email"
+msgid "Email"
+msgstr "Email adres"
+
+#: committees/templates/committees/detail.html:18
+#, fuzzy
+#| msgid "contact person"
+msgid "Contact Person"
+msgstr "Contact Persoon"
+
+#: committees/templates/committees/detail.html:22
+msgid "Members"
+msgstr "Commissie Leden"
+
+#: committees/templates/committees/detail.html:26
+msgid "Name"
+msgstr "Commissie Naam"
+
+#: committees/templates/committees/detail.html:41
+#, fuzzy
+#| msgid "Committee"
+msgid "Committee not found."
+msgstr "Commissie niet gevonden."
+
+#: committees/templates/committees/index.html:23
+msgid "No committees available."
+msgstr "Geen commissies beschikbaar."

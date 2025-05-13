@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}
     {% if committee %}
         {{ committee.group.name }}
     {% else %}
-        Committee
+        {% trans "Committee" %}
     {% endif %}
 {% endblock %}
 
@@ -13,17 +14,17 @@
     {% if committee %}
       <header>
         <h1>{{ committee.group.name }}</h1>
-        <p>Email: <a href="mailto:{{ committee.email }}">{{ committee.email }}</a></p>
-        <p>Contact Person: {{ committee.contact_person.get_full_name }}</p>
+        <p>{% trans "Email" %}: <a href="mailto:{{ committee.email }}">{{ committee.email }}</a></p>
+        <p>{% trans "Contact Person" %}: {{ committee.contact_person.get_full_name }}</p>
       </header>
       <p>{{ committee.description }}</p>
       <section>
-        <h2>Members</h2>
+        <h2>{% trans "Members" %}</h2>
         <table>
           <thead>
             <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
+              <th scope="col">{% trans "Name" %}</th>
+              <th scope="col">{% trans "Email" %}</th>
             </tr>
           </thead>
           <tbody>
@@ -37,7 +38,7 @@
         </table>
       </section>
     {% else %}
-      <p>Committee not found.</p>
+      <p>{% trans "Committee not found." %}</p>
     {% endif %}
   </article>
 {% endblock %}

@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Community News{% endblock %}
+{% block title %}{% trans "Community News" %}{% endblock %}
 
 {% block content %}
   <header>
-    <h1>Latest News</h1>
+    <h1>{% trans "Latest News" %}</h1>
   </header>
   <section>
     {% if latest_posts_list %}
@@ -13,15 +14,15 @@
           <li>
             <article>
               <h2><a href="{% url 'news:detail' post.slug %}">{{ post.title }}</a></h2>
-              <p>Published: <time datetime="{{ post.created_at|date:'Y-m-d' }}">{{ post.created_at|date:'F j, Y' }}</time></p>
-              <p>Committee: {{ post.committee }}</p>
+              <p>{% trans "Published" %}: <time datetime="{{ post.created_at|date:'Y-m-d' }}">{{ post.created_at|date:'F j, Y' }}</time></p>
+              <p>{% trans "Committee" %}: {{ post.committee }}</p>
             </article>
           </li>
         {% endfor %}
       </ul>
     {% else %}
-      <p>No news posts available.</p>
+      <p>{% trans "No news posts available."%}</p>
     {% endif %}
-    <a href="{% url 'news:archive' %}">View News Archive</a>
+    <a href="{% url 'news:archive' %}">{% trans "View News Archive" %}</a>
   </section>
 {% endblock %}

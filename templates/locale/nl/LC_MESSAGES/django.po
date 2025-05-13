@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-13 21:38+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/base.html:8 templates/base.html:13 templates/home.html:4
+msgid "Neighborhood Community"
+msgstr "Buurtgemeenschap"
+
+#: templates/base.html:18
+msgid "News"
+msgstr "Nieuws"
+
+#: templates/base.html:19
+msgid "Activities"
+msgstr "Activiteiten"
+
+#: templates/base.html:20
+msgid "Committees"
+msgstr "Commissies"
+
+#: templates/base.html:32
+msgid "Neighborhood Community. All rights reserved."
+msgstr "Buurtgemeenschap. Alle rechten voorbehouden."
+
+#: templates/home.html:8
+msgid "Welcome to the Neighborhood Community Application!"
+msgstr "Welkom bij de Buurtgemeenschap Applicatie!"
+
+#: templates/home.html:9
+msgid ""
+"This is a platform where you can find information about local news, "
+"activities, and committees."
+msgstr ""
+"Dit is een platform waar je informatie kunt vinden over lokaal nieuws, "
+"activiteiten en commissies."
+
+#: templates/home.html:13
+msgid "Check out the latest news"
+msgstr "Zie het laatste nieuws"
+
+#: templates/home.html:13
+msgid "or"
+msgstr "of"
+
+#: templates/home.html:13
+msgid "explore upcoming activities"
+msgstr "ontdek aankomende activiteiten"
+
+#: templates/home.html:16
+msgid "If you're interested in getting involved"
+msgstr "Als je geïnteresseerd bent om betrokken te raken"
+
+#: templates/home.html:16
+msgid "learn more about our committees"
+msgstr "leer meer over onze commissies"
