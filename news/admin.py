@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
 
 from .models import Post
 
@@ -8,9 +9,9 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ('title', 'content')
     fieldsets = [
         (None, {'fields': ['title', 'content', 'committee']}),
-        ('Image', {'fields': ['poster']}),
-        ('Attachment', {'fields': ['attachment']}),
-        ('Metadata', { 'fields': ['created_at'] })
+        (_('Image'), {'fields': ['poster']}),
+        (_('Attachment'), {'fields': ['attachment']}),
+        (_('Metadata'), { 'fields': ['created_at'] })
     ]
 
 admin.site.register(Post, PostAdmin)
