@@ -1,21 +1,23 @@
+{% load i18n %}
+
 <!DOCTYPE html>
 <html lang="{% block lang %}en{% endblock %}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
-  <title>{% block title %}Neighborhood Community{% endblock %}</title>
+  <title>{% block title %}{% trans "Neighborhood Community" %}{% endblock %}</title>
 </head>
 <body>
   <header>
     <a href="{% block heading-link %}/{% endblock %}">
-        <h1>Neighborhood Community</h1>
+        <h1>{% trans "Neighborhood Community" %}</h1>
     </a>
     <nav aria-label="Main Navigation">
       {% block nav %}
       <ul>
-        <li><a href="{% url 'news:index' %}">News</a></li>
-        <li><a href="{% url 'activities:index' %}">Activities</a></li>
-        <li><a href="{% url 'committees:index' %}">Committees</a></li>
+        <li><a href="{% url 'news:index' %}">{% trans "News" %}</a></li>
+        <li><a href="{% url 'activities:index' %}">{% trans "Activities" %}</a></li>
+        <li><a href="{% url 'committees:index' %}">{% trans "Committees" %}</a></li>
       </ul>
       {% endblock %}
     </nav>
@@ -27,7 +29,7 @@
   <footer>
     {% block footer %}
       <p>
-        <small>&copy; {% now "Y" %} Neighborhood Community. All rights reserved.</small>
+        <small>&copy; {% now "Y" %} {% trans "Neighborhood Community. All rights reserved." %}</small>
       </p>
     {% endblock %}
   </footer>

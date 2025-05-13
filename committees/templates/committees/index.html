@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Committees{% endblock %}
+{% block title %}{% trans "Committees" %}{% endblock %}
 
 {% block content %}
   <header>
-    <h1>Committees</h1>
+    <h1>{% trans "Committees" %}</h1>
   </header>
   <section>
     {% if committee_list %}
@@ -19,7 +20,7 @@
         {% endfor %}
       </ul>
     {% else %}
-      <p>No committees available.</p>
+      <p>{% trans "No committees available." %}</p>
     {% endif %}
   </section>
 {% endblock %}

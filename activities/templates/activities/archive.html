@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Activities Archive{% endblock %}
+{% block title %}{% trans "Activities Archive" %}{% endblock %}
 
 {% block content %}
   <header>
-    <h1>Activities Archive</h1>
+    <h1>{% trans "Activities Archive" %}</h1>
   </header>
   <nav aria-label="Filter by Committee">
-    <p>Filter by Committee:</p>
+    <p>{% trans "Filter by Committee" %}:</p>
     <ul>
       {% for committee in all_committees %}
         <li>
@@ -19,16 +20,16 @@
     </ul>
     {% if filtered_committee %}
       <p>
-        <a href="{% url 'activities:archive' %}">Remove Filter</a>
+        <a href="{% url 'activities:archive' %}">{% trans "Remove Filter" %}</a>
       </p>
     {% endif %}
   </nav>
   <section>
     <h2>
       {% if filtered_committee %}
-        Activities by {{ filtered_committee.group.name }}
+        {% trans "Activities by"%} {{ filtered_committee.group.name }}
       {% else %}
-        Activities by All Committees
+        {% trans "Activities by All Committees" %}
       {% endif %}
     </h2>
     {% for year, months in grouped_activities.items %}

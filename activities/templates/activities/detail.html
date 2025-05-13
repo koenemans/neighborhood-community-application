@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}
     {% if activity %}
@@ -14,18 +15,18 @@
       <header>
         <h1>{{ activity.title }}</h1>
         {% if activity.poster %}
-          <img src="{{ activity.poster.url }}" alt="Poster for {{ activity.title }}" style="max-width: 500px; height: auto;">
+          <img src="{{ activity.poster.url }}" alt="{% trans "Poster for" %} {{ activity.title }}" style="max-width: 500px; height: auto;">
         {% else %}
-          <p>No poster available for this activity.</p>
+          <p>{% trans "No poster available for this activity." %}</p>
         {% endif %}
-        <p>Start: <time datetime="{{ activity.start|date:'Y-m-d' }}">{{ activity.start|date:'F j, Y,  H:i' }}</time></p>
-        <p>End: <time datetime="{{ activity.end|date:'Y-m-d' }}">{{ activity.end|date:'F j, Y,  H:i' }}</time></p>
-        <p>Location: {{ activity.location }}</p>
-        <p>Committee: {{ activity.committee }}</p>
+        <p>{% trans "Start" %}: <time datetime="{{ activity.start|date:'Y-m-d' }}">{{ activity.start|date:'F j, Y,  H:i' }}</time></p>
+        <p>{% trans "End" %}: <time datetime="{{ activity.end|date:'Y-m-d' }}">{{ activity.end|date:'F j, Y,  H:i' }}</time></p>
+        <p>{% trans "Location" %}: {{ activity.location }}</p>
+        <p>{% trans "Committee" %}: {{ activity.committee }}</p>
       </header>
       <p>{{ activity.content }}</p>
     {% else %}
-      <p>Activity no longer available.</p>
+      <p>{% trans "Activity no longer available." %}</p>
     {% endif %}
   </article>
 {% endblock %}

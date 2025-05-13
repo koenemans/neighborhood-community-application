@@ -1,18 +1,19 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Neighborhood Community{% endblock %}
+{% block title %}{% trans "Neighborhood Community" %}{% endblock %}
 
 {% block content %}
   <header>
-    <p>Welcome to the Neighborhood Community Application!</p>
-    <p>This is a platform where you can find information about local news, activities, and committees.</p>
+    <p>{% trans "Welcome to the Neighborhood Community Application!" %}</p>
+    <p>{% trans "This is a platform where you can find information about local news, activities, and committees." %}</p>
   </header>
   <section>
     <p>
-      <a href="{% url 'news:index' %}">Check out the latest news</a> or <a href="{% url 'activities:index' %}">explore upcoming activities</a>.
+      <a href="{% url 'news:index' %}">{% trans "Check out the latest news" %}</a> {% trans "or" %} <a href="{% url 'activities:index' %}">{% trans "explore upcoming activities" %}</a>.
     </p>
     <p>
-      If you're interested in getting involved, <a href="{% url 'committees:index' %}">learn more about our committees</a>.
+      {% trans "If you're interested in getting involved" %}, <a href="{% url 'committees:index' %}">{% trans "learn more about our committees" %}</a>.
     </p>
   </section>
 {% endblock %}
