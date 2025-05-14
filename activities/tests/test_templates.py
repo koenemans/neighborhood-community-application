@@ -5,7 +5,9 @@ from committees.models import Committee
 from activities.models import Activity
 from django.utils import timezone
 import datetime
+from django.test import override_settings
 
+@override_settings(LANGUAGE_CODE='en-us')
 class ActivitiesTemplateTest(TestCase):
     def setUp(self):
         # Setup user and committee
