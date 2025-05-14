@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-13 21:38+0200\n"
+"POT-Creation-Date: 2025-05-14 14:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,25 +66,27 @@ msgstr "gewijzigd op"
 msgid "News Archive"
 msgstr "Nieuws Archief"
 
-#: news/templates/news/archive.html:11
-msgid "Filter by Committee:"
+#: news/templates/news/archive.html:10 news/templates/news/archive.html:12
+msgid "Filter by Committee"
 msgstr "Filter op Commissie"
 
-#: news/templates/news/archive.html:23
+#: news/templates/news/archive.html:14
+msgid "All Committees"
+msgstr "Alle Commissies"
+
+#: news/templates/news/archive.html:24
 msgid "Remove Filter"
 msgstr "Verwijder filter"
 
-#: news/templates/news/archive.html:30
-#| msgid "News"
+#: news/templates/news/archive.html:31
 msgid "News by"
 msgstr "Nieuws van"
 
-#: news/templates/news/archive.html:32
+#: news/templates/news/archive.html:33
 msgid "News by All Committees"
 msgstr "Nieuws van alle commissies"
 
 #: news/templates/news/detail.html:8
-#| msgid "Post"
 msgid "News Post"
 msgstr "Nieuws Bericht"
 
@@ -101,7 +103,6 @@ msgid "Published"
 msgstr "Gepubliceerd"
 
 #: news/templates/news/detail.html:23 news/templates/news/index.html:18
-#| msgid "committee"
 msgid "Committee"
 msgstr "Commissie"
 
