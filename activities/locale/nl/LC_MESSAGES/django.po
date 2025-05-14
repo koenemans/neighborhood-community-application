@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-13 21:38+0200\n"
+"POT-Creation-Date: 2025-05-14 14:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,10 +82,8 @@ msgstr "gewijzigd op"
 
 #: activities/templates/activities/archive.html:4
 #: activities/templates/activities/archive.html:8
-#, fuzzy
-#| msgid "Activities"
 msgid "Activities Archive"
-msgstr "Activiteiten"
+msgstr "Activiteiten Archief"
 
 #: activities/templates/activities/archive.html:11
 msgid "Filter by Committee"
@@ -96,8 +94,6 @@ msgid "Remove Filter"
 msgstr "Verwijder filter"
 
 #: activities/templates/activities/archive.html:30
-#, fuzzy
-#| msgid "Activities"
 msgid "Activities by"
 msgstr "Activiteiten door"
 
@@ -114,6 +110,7 @@ msgid "No poster available for this activity."
 msgstr "Geen poster beschikbaar voor deze activiteit."
 
 #: activities/templates/activities/detail.html:22
+#: activities/templates/activities/index.html:17
 msgid "Start"
 msgstr "Start datum"
 
@@ -123,14 +120,10 @@ msgstr "Eind datum"
 
 #: activities/templates/activities/detail.html:24
 #: activities/templates/activities/index.html:18
-#, fuzzy
-#| msgid "location"
 msgid "Location"
 msgstr "Locatie"
 
 #: activities/templates/activities/detail.html:25
-#, fuzzy
-#| msgid "committee"
 msgid "Committee"
 msgstr "Commissie"
 
@@ -139,8 +132,6 @@ msgid "Activity no longer available."
 msgstr "Activiteit niet langer beschikbaar."
 
 #: activities/templates/activities/index.html:8
-#, fuzzy
-#| msgid "Activities"
 msgid "Upcoming Activities"
 msgstr "Aankomende activiteiten"
 
@@ -149,7 +140,5 @@ msgid "No upcoming activities available."
 msgstr "Geen aankomende activiteiten."
 
 #: activities/templates/activities/index.html:26
-#, fuzzy
-#| msgid "Activities"
 msgid "View Activities Archive"
 msgstr "Ga naar het activiteiten archief"

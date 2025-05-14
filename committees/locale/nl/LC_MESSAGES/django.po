@@ -45,13 +45,11 @@ msgstr "email adres"
 
 #: committees/templates/committees/detail.html:17
 #: committees/templates/committees/detail.html:27
-#, fuzzy
 #| msgid "email"
 msgid "Email"
 msgstr "Email adres"
 
 #: committees/templates/committees/detail.html:18
-#, fuzzy
 #| msgid "contact person"
 msgid "Contact Person"
 msgstr "Contact Persoon"
@@ -65,7 +63,6 @@ msgid "Name"
 msgstr "Commissie Naam"
 
 #: committees/templates/committees/detail.html:41
-#, fuzzy
 #| msgid "Committee"
 msgid "Committee not found."
 msgstr "Commissie niet gevonden."
