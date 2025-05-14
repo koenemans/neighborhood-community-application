@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-14 14:04+0200\n"
+"POT-Creation-Date: 2025-05-14 14:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,19 +85,24 @@ msgstr "gewijzigd op"
 msgid "Activities Archive"
 msgstr "Activiteiten Archief"
 
-#: activities/templates/activities/archive.html:11
+#: activities/templates/activities/archive.html:10
+#: activities/templates/activities/archive.html:12
 msgid "Filter by Committee"
 msgstr "Filter op commissie"
 
-#: activities/templates/activities/archive.html:23
+#: activities/templates/activities/archive.html:14
+msgid "All Committees"
+msgstr "Alle Commissies"
+
+#: activities/templates/activities/archive.html:24
 msgid "Remove Filter"
 msgstr "Verwijder filter"
 
-#: activities/templates/activities/archive.html:30
+#: activities/templates/activities/archive.html:31
 msgid "Activities by"
 msgstr "Activiteiten door"
 
-#: activities/templates/activities/archive.html:32
+#: activities/templates/activities/archive.html:33
 msgid "Activities by All Committees"
 msgstr "Activiteiten door alle commissies"
 

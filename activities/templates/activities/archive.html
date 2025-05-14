@@ -7,23 +7,24 @@
   <header>
     <h1>{% trans "Activities Archive" %}</h1>
   </header>
-  <nav aria-label="Filter by Committee">
-    <p>{% trans "Filter by Committee" %}:</p>
-    <ul>
+  <aside aria-label="{% trans "Filter by Committee" %}">
+    <form method="get" action="{% url 'activities:archive' %}">
+      <label for="committee-select">{% trans "Filter by Committee" %}:</label>
+      <select id="committee-select" name="committee" onchange="this.form.submit()">
+      <option value="" {% if not filtered_committee %}selected{% endif %}>{% trans "All Committees" %}</option>
       {% for committee in all_committees %}
-        <li>
-          <a href="{% url 'activities:archive' %}?committee={{ committee.slug }}">
-            {{ committee.group.name }}
-          </a>
-        </li>
+        <option value="{{ committee.slug }}" {% if filtered_committee == committee %}selected{% endif %}>
+        {{ committee.group.name }}
+        </option>
       {% endfor %}
-    </ul>
+      </select>
+    </form>
     {% if filtered_committee %}
       <p>
         <a href="{% url 'activities:archive' %}">{% trans "Remove Filter" %}</a>
       </p>
     {% endif %}
-  </nav>
+  </aside>
   <section>
     <h2>
       {% if filtered_committee %}
