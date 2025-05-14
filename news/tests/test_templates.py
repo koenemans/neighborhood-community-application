@@ -3,7 +3,9 @@ from django.urls import reverse
 from django.contrib.auth.models import User, Group
 from committees.models import Committee
 from news.models import Post
+from django.test import override_settings
 
+@override_settings(LANGUAGE_CODE='en-us')
 class NewsTemplateTest(TestCase):
     def setUp(self):
         # Setup user and committee

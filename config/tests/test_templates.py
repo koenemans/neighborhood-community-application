@@ -1,6 +1,8 @@
 from django.test import TestCase
 from django.urls import reverse
+from django.test import override_settings
 
+@override_settings(LANGUAGE_CODE='en-us')
 class TemplateTest(TestCase):
     """Tests for template loading and rendering."""
     
