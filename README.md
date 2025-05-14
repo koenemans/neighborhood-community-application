@@ -65,7 +65,79 @@ This project is built with simplicity, extensibility, and contribution in mind.
 
 ## 📦 Getting Started
 
-> *Coming soon:* Detailed setup instructions for developers.
+### Prerequisites
+- Python 3.8+ installed
+- pip (Python package manager)
+- Git
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/neighborhood-community-application.git
+   cd neighborhood-community-application
+   ```
+
+2. **Set up a virtual environment**
+   ```bash
+   python -m venv venv
+   ```
+
+3. **Activate the virtual environment**
+   - On Windows:
+     ```bash
+     venv\Scripts\activate
+     ```
+   - On macOS/Linux:
+     ```bash
+     source venv/bin/activate
+     ```
+
+4. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+5. **Run database migrations**
+   ```bash
+   python manage.py migrate
+   ```
+
+6. **Create a superuser for admin access**
+   ```bash
+   python manage.py createsuperuser
+   ```
+
+7. **Start the development server**
+   ```bash
+   python manage.py runserver
+   ```
+
+8. **Access the application**
+   - Website: http://127.0.0.1:8000/
+   - Admin portal: http://127.0.0.1:8000/admin/
+
+### Development Workflow
+
+1. **Create a new branch for your feature**
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+2. **Make your changes and run tests**
+   ```bash
+   python manage.py test
+   ```
+
+3. **Submit a pull request**
+   - Push your branch to the repository
+   - Create a pull request with a description of your changes
+
+### Committees and User Groups
+This application uses Django's built-in Groups functionality to manage committees:
+- Each committee is represented as a Django Group
+- Committee members are assigned to their respective Group
+- Content is associated with specific committees for filtering
 
 ---
 
