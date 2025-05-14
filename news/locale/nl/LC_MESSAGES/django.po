@@ -75,7 +75,6 @@ msgid "Remove Filter"
 msgstr "Verwijder filter"
 
 #: news/templates/news/archive.html:30
-#, fuzzy
 #| msgid "News"
 msgid "News by"
 msgstr "Nieuws van"
@@ -85,7 +84,6 @@ msgid "News by All Committees"
 msgstr "Nieuws van alle commissies"
 
 #: news/templates/news/detail.html:8
-#, fuzzy
 #| msgid "Post"
 msgid "News Post"
 msgstr "Nieuws Bericht"
@@ -103,7 +101,6 @@ msgid "Published"
 msgstr "Gepubliceerd"
 
 #: news/templates/news/detail.html:23 news/templates/news/index.html:18
-#, fuzzy
 #| msgid "committee"
 msgid "Committee"
 msgstr "Commissie"

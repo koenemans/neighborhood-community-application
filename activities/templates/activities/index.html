@@ -14,8 +14,8 @@
           <li>
             <article>
               <h2><a href="{% url 'activities:detail' activity.slug %}">{{ activity.title }}</a></h2>
-              <p><time datetime="{{ activity.start|date:'Y-m-d' }}">{{ activity.start|date:'F j, Y, H:i' }}</time></p>
-              <p>{%trans "Location" %}: {{ activity.location }}</p>
+              <p>{% trans "Start" %}: <time datetime="{{ activity.start|date:'Y-m-d' }}">{{ activity.start|date:'F j, Y, H:i' }}</time></p>
+              <p>{% trans "Location" %}: {{ activity.location }}</p>
             </article>
           </li>
         {% endfor %}
