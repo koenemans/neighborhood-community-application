@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 from committees.models import Committee
 from django.utils.translation import gettext_lazy as _
+from utils.upload_paths import hashed_upload_path
 
 class Post(models.Model):
     class Meta:
@@ -14,8 +15,8 @@ class Post(models.Model):
     title = models.CharField(_('title'), max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     content = models.TextField(_('content'))
-    poster = models.ImageField(upload_to='news/posters/%Y/%m/%d/', blank=True, null=True)
-    attachment = models.FileField(_('attachment'), upload_to='news/attachments/%Y/%m/%d/', blank=True, null=True)
+    poster = models.ImageField(upload_to=hashed_upload_path('news/posters'), blank=True, null=True)
+    attachment = models.FileField(_('attachment'), upload_to=hashed_upload_path('news/attachments'), blank=True, null=True)
     committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name='news', verbose_name=_('committee'))
     created_at = models.DateTimeField(_('created at'), default=timezone.now)
     updated_at = models.DateTimeField(_('updated at'), auto_now=True)
