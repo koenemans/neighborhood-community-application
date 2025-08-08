@@ -5,6 +5,7 @@ from django.utils.text import slugify
 from committees.models import Committee
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from utils.upload_paths import hashed_upload_path
 
 def start_date_not_in_past(date):
     if date < timezone.now():
@@ -25,7 +26,7 @@ class Activity(models.Model):
     start = models.DateTimeField(_('start date'), validators=[start_date_not_in_past])
     end = models.DateTimeField(_('end date'))
     location = models.CharField(_('location'), max_length=200)
-    poster = models.ImageField(upload_to='activities/posters/%Y/%m/%d/', blank=True, null=True)
+    poster = models.ImageField(upload_to=hashed_upload_path('activities/posters'), blank=True, null=True)
     committee = models.ForeignKey(Committee, on_delete=models.CASCADE, related_name='activities', verbose_name=_('committee'))
     created_at = models.DateTimeField(_('created at'), default=timezone.now)
     updated_at = models.DateTimeField(_('updated at'), auto_now=True)
