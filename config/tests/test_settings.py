@@ -56,3 +56,12 @@ class SettingsTest(TestCase):
         self.assertEqual(settings.X_FRAME_OPTIONS, "DENY")
         self.assertGreaterEqual(settings.SECURE_HSTS_SECONDS, 0)
         self.assertIsInstance(settings.CSRF_TRUSTED_ORIGINS, list)
+
+    def test_cache_configuration(self):
+        """Test that Redis caching is configured with a sensible default."""
+        cache_config = settings.CACHES["default"]
+        self.assertEqual(cache_config["BACKEND"], "django_redis.cache.RedisCache")
+        self.assertEqual(
+            cache_config["LOCATION"],
+            os.getenv("REDIS_URL", "redis://127.0.0.1:6379/1"),
+        )
