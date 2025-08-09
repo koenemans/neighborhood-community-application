@@ -133,6 +133,18 @@ This project is built with simplicity, extensibility, and contribution in mind.
    - Push your branch to the repository
    - Create a pull request with a description of your changes
 
+### Security Configuration
+
+Set the following environment variables for a secure deployment:
+
+- `SECRET_KEY` – unique secret for the application.
+- `DEBUG` – should be `False` in production.
+- `ALLOWED_HOSTS` – comma-separated list of permitted hostnames.
+- `SECURE_SSL_REDIRECT` – set to `True` to force HTTPS.
+- `SESSION_COOKIE_SECURE` and `CSRF_COOKIE_SECURE` – ensure cookies are sent only over HTTPS.
+- `SECURE_HSTS_SECONDS`, `SECURE_HSTS_INCLUDE_SUBDOMAINS`, `SECURE_HSTS_PRELOAD` – control HTTP Strict Transport Security.
+- `CSRF_TRUSTED_ORIGINS` – list of origins trusted to post to the application.
+
 ### Logging
 
 The application uses Python's built-in logging framework. Logs are written to

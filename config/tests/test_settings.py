@@ -44,3 +44,15 @@ class SettingsTest(TestCase):
         """Test that media settings are correctly configured."""
         self.assertEqual(settings.MEDIA_URL, "/media/")
         self.assertEqual(settings.MEDIA_ROOT, os.path.join(settings.BASE_DIR, "media"))
+
+    def test_security_settings(self):
+        """Ensure security-related settings follow Django recommendations."""
+        self.assertIsInstance(settings.ALLOWED_HOSTS, list)
+        self.assertTrue(settings.SESSION_COOKIE_SECURE)
+        self.assertTrue(settings.CSRF_COOKIE_SECURE)
+        self.assertFalse(settings.SECURE_SSL_REDIRECT)
+        self.assertTrue(settings.SECURE_CONTENT_TYPE_NOSNIFF)
+        self.assertEqual(settings.SECURE_REFERRER_POLICY, "same-origin")
+        self.assertEqual(settings.X_FRAME_OPTIONS, "DENY")
+        self.assertGreaterEqual(settings.SECURE_HSTS_SECONDS, 0)
+        self.assertIsInstance(settings.CSRF_TRUSTED_ORIGINS, list)
