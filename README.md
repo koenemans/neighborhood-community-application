@@ -133,6 +133,16 @@ This project is built with simplicity, extensibility, and contribution in mind.
    - Push your branch to the repository
    - Create a pull request with a description of your changes
 
+### Logging
+
+The application uses Python's built-in logging framework. Logs are written to
+both the console and to `logs/app.log`. The verbosity can be controlled with
+the `LOG_LEVEL` environment variable (default: `INFO`). The log directory is
+created automatically when the project starts.
+
+Logging statements are present in the news, activities, and committees apps to
+trace data retrieval and filtering operations, aiding debugging and observability.
+
 ### Committees and User Groups
 This application uses Django's built-in Groups functionality to manage committees:
 - Each committee is represented as a Django Group
