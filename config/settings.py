@@ -16,6 +16,14 @@ import os
 
 load_dotenv()
 
+
+def env_bool(name: str, default: bool = False) -> bool:
+    """Return the boolean value of an environment variable.
+
+    Accepts common truthy values (1, true, yes, on) case-insensitively.
+    """
+    return os.getenv(name, str(default)).lower() in {"1", "true", "yes", "on"}
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -34,7 +42,7 @@ AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME', 'us-east-1')  # Default reg
 AWS_QUERYSTRING_AUTH = False  # Optional: Makes files publicly accessible
 
 # Use S3 for media storage
-if os.getenv('USE_S3') == 'True':
+if env_bool('USE_S3'):
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/'
 
@@ -49,18 +57,18 @@ if not SECRET_KEY or len(SECRET_KEY) < 50:
     )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = (os.getenv('DEBUG') == 'True')
+DEBUG = env_bool('DEBUG')
 
 allowed_hosts_env = os.getenv('ALLOWED_HOSTS', '')
 ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_env.split(',') if host.strip()]
 
 # Security settings
 SECURE_HSTS_SECONDS = int(os.getenv('SECURE_HSTS_SECONDS', '0'))
-SECURE_SSL_REDIRECT = os.getenv('SECURE_SSL_REDIRECT', 'False') == 'True'
-SESSION_COOKIE_SECURE = os.getenv('SESSION_COOKIE_SECURE', 'False') == 'True'
-CSRF_COOKIE_SECURE = os.getenv('CSRF_COOKIE_SECURE', 'False') == 'True'
-SECURE_HSTS_INCLUDE_SUBDOMAINS = os.getenv('SECURE_HSTS_INCLUDE_SUBDOMAINS', 'False') == 'True'
-SECURE_HSTS_PRELOAD = os.getenv('SECURE_HSTS_PRELOAD', 'False') == 'True'
+SECURE_SSL_REDIRECT = env_bool('SECURE_SSL_REDIRECT')
+SESSION_COOKIE_SECURE = env_bool('SESSION_COOKIE_SECURE')
+CSRF_COOKIE_SECURE = env_bool('CSRF_COOKIE_SECURE')
+SECURE_HSTS_INCLUDE_SUBDOMAINS = env_bool('SECURE_HSTS_INCLUDE_SUBDOMAINS')
+SECURE_HSTS_PRELOAD = env_bool('SECURE_HSTS_PRELOAD')
 
 
 # Application definition

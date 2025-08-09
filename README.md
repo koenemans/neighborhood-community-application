@@ -130,6 +130,8 @@ For production deployments, configure the following environment variables:
 - `SECURE_HSTS_INCLUDE_SUBDOMAINS` – apply HSTS to all subdomains
 - `SECURE_HSTS_PRELOAD` – allow preloading of HSTS policy
 
+Boolean variables accept `True`, `1`, `yes`, or `on` (case-insensitive) to enable the setting.
+
 ### Development Workflow
 
 1. **Create a new branch for your feature**
