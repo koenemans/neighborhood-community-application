@@ -7,15 +7,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('auth', '0012_alter_user_first_name_max_length'),
-        ('news', '0003_alter_post_created_at'),
+        ("auth", "0012_alter_user_first_name_max_length"),
+        ("news", "0003_alter_post_created_at"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='post',
-            name='author',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='news', to='auth.group'),
+            model_name="post",
+            name="author",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="news",
+                to="auth.group",
+            ),
             preserve_default=False,
         ),
     ]

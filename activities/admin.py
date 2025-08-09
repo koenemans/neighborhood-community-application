@@ -4,27 +4,30 @@ from django.utils.translation import gettext_lazy as _
 
 from .models import Activity
 
+
 class ActivityAdmin(admin.ModelAdmin):
-    list_display = ('title', 'location', 'start', 'end')
-    list_filter = ('start', 'end')
-    search_fields = ('title', 'content', 'location')
+    list_display = ("title", "location", "start", "end")
+    list_filter = ("start", "end")
+    search_fields = ("title", "content", "location")
     fieldsets = [
-        (None, {'fields': ['title', 'content', 'committee']}),
-        (_('Practical Information'), { 'fields': ['location', 'start', 'end'] }),
-        (_('Image'), {'fields': ['poster']}),
-        (_('Metadata'), { 'fields': ['created_at'] })
+        (None, {"fields": ["title", "content", "committee"]}),
+        (_("Practical Information"), {"fields": ["location", "start", "end"]}),
+        (_("Image"), {"fields": ["poster"]}),
+        (_("Metadata"), {"fields": ["created_at"]}),
     ]
 
     def clean(self):
         cleaned_data = super().clean()
-        start = cleaned_data.get('start')
-        end = cleaned_data.get('end')
+        start = cleaned_data.get("start")
+        end = cleaned_data.get("end")
         if start and end:
             if end < start:
                 raise ValidationError(
-                    _("End date %(end)s cannot be before the start date %(start)s") % { 'end': end, 'start': start },
-                    code='invalid'
+                    _("End date %(end)s cannot be before the start date %(start)s")
+                    % {"end": end, "start": start},
+                    code="invalid",
                 )
         return cleaned_data
+
 
 admin.site.register(Activity, ActivityAdmin)

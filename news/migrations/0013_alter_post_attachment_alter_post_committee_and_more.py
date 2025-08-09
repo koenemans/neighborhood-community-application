@@ -8,39 +8,51 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('committees', '0005_alter_committee_options_and_more'),
-        ('news', '0012_rename_attachement_post_attachment'),
+        ("committees", "0005_alter_committee_options_and_more"),
+        ("news", "0012_rename_attachement_post_attachment"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='post',
-            name='attachment',
-            field=models.FileField(blank=True, null=True, upload_to='news/attachments/%Y/%m/%d/', verbose_name='attachment'),
+            model_name="post",
+            name="attachment",
+            field=models.FileField(
+                blank=True,
+                null=True,
+                upload_to="news/attachments/%Y/%m/%d/",
+                verbose_name="attachment",
+            ),
         ),
         migrations.AlterField(
-            model_name='post',
-            name='committee',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='news', to='committees.committee', verbose_name='committee'),
+            model_name="post",
+            name="committee",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="news",
+                to="committees.committee",
+                verbose_name="committee",
+            ),
         ),
         migrations.AlterField(
-            model_name='post',
-            name='content',
-            field=models.TextField(verbose_name='content'),
+            model_name="post",
+            name="content",
+            field=models.TextField(verbose_name="content"),
         ),
         migrations.AlterField(
-            model_name='post',
-            name='created_at',
-            field=models.DateTimeField(default=django.utils.timezone.now, verbose_name='created at'),
+            model_name="post",
+            name="created_at",
+            field=models.DateTimeField(
+                default=django.utils.timezone.now, verbose_name="created at"
+            ),
         ),
         migrations.AlterField(
-            model_name='post',
-            name='title',
-            field=models.CharField(max_length=200, verbose_name='title'),
+            model_name="post",
+            name="title",
+            field=models.CharField(max_length=200, verbose_name="title"),
         ),
         migrations.AlterField(
-            model_name='post',
-            name='updated_at',
-            field=models.DateTimeField(auto_now=True, verbose_name='updated at'),
+            model_name="post",
+            name="updated_at",
+            field=models.DateTimeField(auto_now=True, verbose_name="updated at"),
         ),
     ]

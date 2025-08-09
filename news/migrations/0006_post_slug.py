@@ -6,14 +6,14 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('news', '0005_rename_author_post_committee'),
+        ("news", "0005_rename_author_post_committee"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='post',
-            name='slug',
-            field=models.SlugField(default='abcd', max_length=200),
+            model_name="post",
+            name="slug",
+            field=models.SlugField(default="abcd", max_length=200),
             preserve_default=False,
         ),
     ]

@@ -7,17 +7,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('activities', '0008_activity_poster'),
+        ("activities", "0008_activity_poster"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='activity',
-            options={'ordering': ['start'], 'verbose_name': 'Activity', 'verbose_name_plural': 'Activities'},
+            name="activity",
+            options={
+                "ordering": ["start"],
+                "verbose_name": "Activity",
+                "verbose_name_plural": "Activities",
+            },
         ),
         migrations.AlterField(
-            model_name='activity',
-            name='start',
-            field=models.DateTimeField(validators=[activities.models.start_date_not_in_past]),
+            model_name="activity",
+            name="start",
+            field=models.DateTimeField(
+                validators=[activities.models.start_date_not_in_past]
+            ),
         ),
     ]

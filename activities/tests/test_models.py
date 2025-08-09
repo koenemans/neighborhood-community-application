@@ -10,9 +10,12 @@ import tempfile
 import datetime
 import re
 
+
 class ActivityModelFieldTest(TestCase):
     def setUp(self):
-        user = User.objects.create_user(username="testuser", email="user@example.com", password="password")
+        user = User.objects.create_user(
+            username="testuser", email="user@example.com", password="password"
+        )
         group = Group.objects.create(name="Test Committee")
 
         self.committee = Committee.objects.create(
@@ -20,7 +23,7 @@ class ActivityModelFieldTest(TestCase):
             slug="test-committee",
             description="A test committee",
             contact_person=user,
-            email="test@example.com"
+            email="test@example.com",
         )
 
     def test_title_max_length(self):
@@ -32,7 +35,7 @@ class ActivityModelFieldTest(TestCase):
             start=timezone.now(),
             end=timezone.now() + datetime.timedelta(hours=2),
             location="Test Location",
-            committee=self.committee
+            committee=self.committee,
         )
         with self.assertRaises(ValidationError):
             activity.full_clean()
@@ -46,13 +49,16 @@ class ActivityModelFieldTest(TestCase):
             start=timezone.now() + datetime.timedelta(hours=1),
             end=timezone.now() + datetime.timedelta(hours=3),
             location="Test Location",
-            committee=self.committee
+            committee=self.committee,
         )
         self.assertEqual(str(activity), "Test String Activity")
 
+
 class ActivityModelRelationshipTest(TestCase):
     def setUp(self):
-        user = User.objects.create_user(username="testuser", email="user@example.com", password="password")
+        user = User.objects.create_user(
+            username="testuser", email="user@example.com", password="password"
+        )
         group = Group.objects.create(name="Test Committee")
 
         self.committee = Committee.objects.create(
@@ -60,7 +66,7 @@ class ActivityModelRelationshipTest(TestCase):
             slug="test-committee",
             description="A test committee",
             contact_person=user,
-            email="test@example.com"
+            email="test@example.com",
         )
 
         self.activity = Activity.objects.create(
@@ -70,16 +76,19 @@ class ActivityModelRelationshipTest(TestCase):
             start=timezone.now(),
             end=timezone.now() + datetime.timedelta(hours=2),
             location="Test Location",
-            committee=self.committee
+            committee=self.committee,
         )
 
     def test_activity_belongs_to_committee(self):
         """Test that the activity belongs to the correct committee."""
         self.assertEqual(self.activity.committee, self.committee)
 
+
 class ActivityModelGetAbsoluteUrlTest(TestCase):
     def setUp(self):
-        user = User.objects.create_user(username="testuser", email="user@example.com", password="password")
+        user = User.objects.create_user(
+            username="testuser", email="user@example.com", password="password"
+        )
         group = Group.objects.create(name="Test Committee")
 
         self.committee = Committee.objects.create(
@@ -87,7 +96,7 @@ class ActivityModelGetAbsoluteUrlTest(TestCase):
             slug="test-committee",
             description="A test committee",
             contact_person=user,
-            email="test@example.com"
+            email="test@example.com",
         )
 
         self.activity = Activity.objects.create(
@@ -97,7 +106,7 @@ class ActivityModelGetAbsoluteUrlTest(TestCase):
             start=timezone.now(),
             end=timezone.now() + datetime.timedelta(hours=2),
             location="Test Location",
-            committee=self.committee
+            committee=self.committee,
         )
 
     def test_get_absolute_url(self):
@@ -105,9 +114,12 @@ class ActivityModelGetAbsoluteUrlTest(TestCase):
         expected_url = f"/activities/{self.activity.slug}/"
         self.assertEqual(self.activity.get_absolute_url(), expected_url)
 
+
 class ActivityModelSlugTest(TestCase):
     def setUp(self):
-        user = User.objects.create_user(username="testuser", email="user@example.com", password="password")
+        user = User.objects.create_user(
+            username="testuser", email="user@example.com", password="password"
+        )
         group = Group.objects.create(name="Test Committee")
 
         self.committee = Committee.objects.create(
@@ -115,7 +127,7 @@ class ActivityModelSlugTest(TestCase):
             slug="test-committee",
             description="A test committee",
             contact_person=user,
-            email="test@example.com"
+            email="test@example.com",
         )
 
     def test_slug_generation(self):
@@ -126,13 +138,16 @@ class ActivityModelSlugTest(TestCase):
             start=timezone.now(),
             end=timezone.now() + datetime.timedelta(hours=2),
             location="Test Location",
-            committee=self.committee
+            committee=self.committee,
         )
         self.assertEqual(activity.slug, "test-activity")
 
+
 class ActivityModelOrderingTest(TestCase):
     def setUp(self):
-        user = User.objects.create_user(username="testuser", email="user@example.com", password="password")
+        user = User.objects.create_user(
+            username="testuser", email="user@example.com", password="password"
+        )
         group = Group.objects.create(name="Test Committee")
 
         self.committee = Committee.objects.create(
@@ -140,7 +155,7 @@ class ActivityModelOrderingTest(TestCase):
             slug="test-committee",
             description="A test committee",
             contact_person=user,
-            email="test@example.com"
+            email="test@example.com",
         )
 
         self.activity1 = Activity.objects.create(
@@ -148,9 +163,11 @@ class ActivityModelOrderingTest(TestCase):
             slug="second-activity",
             content="This is the second activity",
             start=timezone.now() + datetime.timedelta(days=7),
-            end=timezone.now() + datetime.timedelta(days=7) + datetime.timedelta(hours=2),
+            end=timezone.now()
+            + datetime.timedelta(days=7)
+            + datetime.timedelta(hours=2),
             location="Test Location",
-            committee=self.committee
+            committee=self.committee,
         )
 
         self.activity2 = Activity.objects.create(
@@ -158,21 +175,30 @@ class ActivityModelOrderingTest(TestCase):
             slug="first-activity",
             content="This is the first activity",
             start=timezone.now() + datetime.timedelta(days=2),
-            end=timezone.now() + datetime.timedelta(days=2) + datetime.timedelta(hours=2),
+            end=timezone.now()
+            + datetime.timedelta(days=2)
+            + datetime.timedelta(hours=2),
             location="Test Location",
-            committee=self.committee
+            committee=self.committee,
         )
 
     def test_default_ordering(self):
         """Test that activities are ordered by start date."""
         activities = Activity.objects.all()
-        self.assertEqual(activities[0], self.activity2)  # First to start should be first
-        self.assertEqual(activities[1], self.activity1)  # Second to start should be last
+        self.assertEqual(
+            activities[0], self.activity2
+        )  # First to start should be first
+        self.assertEqual(
+            activities[1], self.activity1
+        )  # Second to start should be last
+
 
 @override_settings(MEDIA_ROOT=tempfile.gettempdir())
 class ActivityModelPosterTest(TestCase):
     def setUp(self):
-        user = User.objects.create_user(username="testuser", email="user@example.com", password="password")
+        user = User.objects.create_user(
+            username="testuser", email="user@example.com", password="password"
+        )
         group = Group.objects.create(name="Test Committee")
 
         self.committee = Committee.objects.create(
@@ -180,12 +206,14 @@ class ActivityModelPosterTest(TestCase):
             slug="test-committee",
             description="A test committee",
             contact_person=user,
-            email="test@example.com"
+            email="test@example.com",
         )
 
     def test_poster_upload(self):
         """Test that the poster can be uploaded and saved correctly."""
-        poster = SimpleUploadedFile("poster.jpg", b"file_content", content_type="image/jpeg")
+        poster = SimpleUploadedFile(
+            "poster.jpg", b"file_content", content_type="image/jpeg"
+        )
         activity = Activity.objects.create(
             title="Test Activity",
             slug="test-activity",
@@ -194,17 +222,23 @@ class ActivityModelPosterTest(TestCase):
             end=timezone.now() + datetime.timedelta(hours=2),
             location="Test Location",
             committee=self.committee,
-            poster=poster
+            poster=poster,
         )
         year = activity.created_at.strftime("%Y")
         month = activity.created_at.strftime("%m")
         day = activity.created_at.strftime("%d")
-        file_hash = re.search(r'\_(.*?)\.', activity.poster.name).group(1)
-        self.assertEqual(activity.poster.name, f'activities/posters/{year}/{month}/{day}/poster_{file_hash}.jpg')
+        file_hash = re.search(r"\_(.*?)\.", activity.poster.name).group(1)
+        self.assertEqual(
+            activity.poster.name,
+            f"activities/posters/{year}/{month}/{day}/poster_{file_hash}.jpg",
+        )
+
 
 class ActivityModelStartDate(TestCase):
     def setUp(self):
-        user = User.objects.create_user(username="testuser", email="user@example.com", password="password")
+        user = User.objects.create_user(
+            username="testuser", email="user@example.com", password="password"
+        )
         group = Group.objects.create(name="Test Committee")
 
         self.committee = Committee.objects.create(
@@ -212,24 +246,23 @@ class ActivityModelStartDate(TestCase):
             slug="test-committee",
             description="A test committee",
             contact_person=user,
-            email="test@example.com"
+            email="test@example.com",
         )
 
     def test_start_in_past(self):
         """Test that the start date cannot be in the past."""
         start = timezone.now() - datetime.timedelta(days=1)
         activity = Activity(
-                title="Test Activity",
-                slug="test-activity",
-                content="Test content",
-                start=start,
-                end=start + datetime.timedelta(hours=2),
-                location="Test Location",
-                committee=self.committee
-            )
+            title="Test Activity",
+            slug="test-activity",
+            content="Test content",
+            start=start,
+            end=start + datetime.timedelta(hours=2),
+            location="Test Location",
+            committee=self.committee,
+        )
         with self.assertRaises(ValidationError):
             activity.full_clean()
-       
 
     def test_start_in_future(self):
         """Test that the start date can be in the future."""
@@ -241,13 +274,16 @@ class ActivityModelStartDate(TestCase):
             start=start,
             end=start + datetime.timedelta(hours=2),
             location="Test Location",
-            committee=self.committee
+            committee=self.committee,
         )
         self.assertEqual(activity.start, start)
 
+
 class ActivityModelEndDate(TestCase):
     def setUp(self):
-        user = User.objects.create_user(username="testuser", email="user@example.com", password="password")
+        user = User.objects.create_user(
+            username="testuser", email="user@example.com", password="password"
+        )
         group = Group.objects.create(name="Test Committee")
 
         self.committee = Committee.objects.create(
@@ -255,7 +291,7 @@ class ActivityModelEndDate(TestCase):
             slug="test-committee",
             description="A test committee",
             contact_person=user,
-            email="test@example.com"
+            email="test@example.com",
         )
 
     def test_end_after_start(self):
@@ -269,7 +305,7 @@ class ActivityModelEndDate(TestCase):
             start=start,
             end=end,
             location="Test Location",
-            committee=self.committee
+            committee=self.committee,
         )
         self.assertEqual(activity.end, end)
 
@@ -284,7 +320,7 @@ class ActivityModelEndDate(TestCase):
             start=start,
             end=end,
             location="Test Location",
-            committee=self.committee
+            committee=self.committee,
         )
         self.assertEqual(activity.end, start)
 
@@ -299,7 +335,7 @@ class ActivityModelEndDate(TestCase):
             start=start,
             end=end,
             location="Test Location",
-            committee=self.committee
+            committee=self.committee,
         )
         with self.assertRaises(ValidationError):
             activity.full_clean()

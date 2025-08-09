@@ -7,14 +7,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('activities', '0006_alter_activity_slug'),
-        ('committees', '0004_alter_committee_contact_person'),
+        ("activities", "0006_alter_activity_slug"),
+        ("committees", "0004_alter_committee_contact_person"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='activity',
-            name='committee',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='activities', to='committees.committee'),
+            model_name="activity",
+            name="committee",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="activities",
+                to="committees.committee",
+            ),
         ),
     ]

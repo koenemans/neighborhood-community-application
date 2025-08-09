@@ -9,49 +9,59 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('activities', '0010_alter_activity_poster'),
-        ('committees', '0004_alter_committee_contact_person'),
+        ("activities", "0010_alter_activity_poster"),
+        ("committees", "0004_alter_committee_contact_person"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='activity',
-            name='committee',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='activities', to='committees.committee', verbose_name='committee'),
+            model_name="activity",
+            name="committee",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="activities",
+                to="committees.committee",
+                verbose_name="committee",
+            ),
         ),
         migrations.AlterField(
-            model_name='activity',
-            name='content',
-            field=models.TextField(verbose_name='content'),
+            model_name="activity",
+            name="content",
+            field=models.TextField(verbose_name="content"),
         ),
         migrations.AlterField(
-            model_name='activity',
-            name='created_at',
-            field=models.DateTimeField(default=django.utils.timezone.now, verbose_name='created at'),
+            model_name="activity",
+            name="created_at",
+            field=models.DateTimeField(
+                default=django.utils.timezone.now, verbose_name="created at"
+            ),
         ),
         migrations.AlterField(
-            model_name='activity',
-            name='end',
-            field=models.DateTimeField(verbose_name='end date'),
+            model_name="activity",
+            name="end",
+            field=models.DateTimeField(verbose_name="end date"),
         ),
         migrations.AlterField(
-            model_name='activity',
-            name='location',
-            field=models.CharField(max_length=200, verbose_name='location'),
+            model_name="activity",
+            name="location",
+            field=models.CharField(max_length=200, verbose_name="location"),
         ),
         migrations.AlterField(
-            model_name='activity',
-            name='start',
-            field=models.DateTimeField(validators=[activities.models.start_date_not_in_past], verbose_name='start date'),
+            model_name="activity",
+            name="start",
+            field=models.DateTimeField(
+                validators=[activities.models.start_date_not_in_past],
+                verbose_name="start date",
+            ),
         ),
         migrations.AlterField(
-            model_name='activity',
-            name='title',
-            field=models.CharField(max_length=200, verbose_name='title'),
+            model_name="activity",
+            name="title",
+            field=models.CharField(max_length=200, verbose_name="title"),
         ),
         migrations.AlterField(
-            model_name='activity',
-            name='updated_at',
-            field=models.DateTimeField(auto_now=True, verbose_name='updated at'),
+            model_name="activity",
+            name="updated_at",
+            field=models.DateTimeField(auto_now=True, verbose_name="updated at"),
         ),
     ]
