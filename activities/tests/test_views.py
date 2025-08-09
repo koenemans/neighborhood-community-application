@@ -1,10 +1,11 @@
-from django.test import TestCase, Client
+from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User, Group
 from committees.models import Committee
 from activities.models import Activity
 import datetime
 from django.utils import timezone
+
 
 class ActivitiesIndexViewTest(TestCase):
     def setUp(self):

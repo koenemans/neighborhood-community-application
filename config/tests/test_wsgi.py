@@ -1,7 +1,7 @@
 from django.test import TestCase
 import os
-import importlib.util
 from config.wsgi import application
+
 
 class WSGITest(TestCase):
     """Tests for the WSGI configuration."""

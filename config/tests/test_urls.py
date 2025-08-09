@@ -1,9 +1,9 @@
 from django.test import TestCase, Client
 from django.urls import reverse, resolve
-from news.views import HomePageView, IndexView as NewsIndexView, DetailView as NewsDetailView
-from activities.views import IndexView as ActivitiesIndexView, DetailView as ActivitiesDetailView
-from committees.views import IndexView as CommitteesIndexView, DetailView as CommitteesDetailView
-from django.contrib.admin.sites import AdminSite
+from news.views import HomePageView, IndexView as NewsIndexView
+from activities.views import IndexView as ActivitiesIndexView
+from committees.views import IndexView as CommitteesIndexView
+
 
 class URLConfigTest(TestCase):
     """Tests for the main URL configuration."""

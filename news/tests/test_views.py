@@ -1,10 +1,11 @@
-from django.test import TestCase, Client
+from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User, Group
 from committees.models import Committee
 from news.models import Post
 import datetime
 from django.utils import timezone
+
 
 class NewsIndexViewTest(TestCase):
     def setUp(self):
