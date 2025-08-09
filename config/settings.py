@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Directory for log files
 LOG_DIR = BASE_DIR / 'logs'
-LOG_DIR.mkdir(exist_ok=True)
+LOG_DIR.mkdir(parents=True, exist_ok=True)
 
 # File upload settings
 MEDIA_URL = '/media/'
@@ -176,6 +176,7 @@ LOGGING = {
             'class': 'logging.FileHandler',
             'filename': str(LOG_DIR / 'app.log'),
             'formatter': 'verbose',
+            'encoding': 'utf-8',
         },
     },
     'root': {
