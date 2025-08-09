@@ -8,12 +8,12 @@ logger = logging.getLogger(__name__)
 
 
 class HomePageView(TemplateView):
-    template_name = 'home.html'
+    template_name = "home.html"
 
 
 class IndexView(ListView):
-    template_name = 'news/index.html'
-    context_object_name = 'latest_posts_list'
+    template_name = "news/index.html"
+    context_object_name = "latest_posts_list"
 
     def get_queryset(self):
         logger.debug("Fetching latest posts for index view")
@@ -22,17 +22,17 @@ class IndexView(ListView):
 
 class DetailView(DetailView):
     model = Post
-    template_name = 'news/detail.html'
+    template_name = "news/detail.html"
 
 
 class NewsArchiveView(base.TemplateView):
-    template_name = 'news/archive.html'
-    context_object_name = 'grouped_news'
+    template_name = "news/archive.html"
+    context_object_name = "grouped_news"
 
     def get_queryset(self):
         # Filter posts by committee if a query parameter is provided
         queryset = Post.objects.all()
-        committee_slug = self.request.GET.get('committee')
+        committee_slug = self.request.GET.get("committee")
         if committee_slug:
             logger.info("Filtering posts for committee %s", committee_slug)
             queryset = queryset.filter(committee__slug=committee_slug)
@@ -48,19 +48,25 @@ class NewsArchiveView(base.TemplateView):
         grouped_news = {}
         for post in queryset:
             year = post.created_at.year
-            month = post.created_at.strftime('%B')
+            month = post.created_at.strftime("%B")
             grouped_news.setdefault(year, {}).setdefault(month, []).append(post)
 
         # Add grouped news and committees to the context
-        context['grouped_news'] = grouped_news
-        context['all_committees'] = Committee.objects.all()
-        committee_slug = self.request.GET.get('committee')
+        context["grouped_news"] = grouped_news
+        context["all_committees"] = Committee.objects.all()
+        committee_slug = self.request.GET.get("committee")
         if committee_slug:
-            context['filtered_committee'] = Committee.objects.filter(slug=committee_slug).first()
+            context["filtered_committee"] = Committee.objects.filter(
+                slug=committee_slug
+            ).first()
         else:
-            context['filtered_committee'] = None
+            context["filtered_committee"] = None
         logger.debug(
             "Prepared context with %d posts",
-            sum(len(month_posts) for year in grouped_news.values() for month_posts in year.values()),
+            sum(
+                len(month_posts)
+                for year in grouped_news.values()
+                for month_posts in year.values()
+            ),
         )
         return context
