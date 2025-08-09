@@ -117,6 +117,19 @@ This project is built with simplicity, extensibility, and contribution in mind.
    - Website: http://127.0.0.1:8000/
    - Admin portal: http://127.0.0.1:8000/admin/
 
+### Security Configuration
+
+For production deployments, configure the following environment variables:
+
+- `SECRET_KEY` – long, random value used for cryptographic signing (required)
+- `ALLOWED_HOSTS` – comma-separated list of allowed hostnames
+- `SECURE_HSTS_SECONDS` – enable HTTP Strict Transport Security
+- `SECURE_SSL_REDIRECT` – redirect all requests to HTTPS
+- `SESSION_COOKIE_SECURE` – mark session cookies as secure
+- `CSRF_COOKIE_SECURE` – mark CSRF cookies as secure
+- `SECURE_HSTS_INCLUDE_SUBDOMAINS` – apply HSTS to all subdomains
+- `SECURE_HSTS_PRELOAD` – allow preloading of HSTS policy
+
 ### Development Workflow
 
 1. **Create a new branch for your feature**
