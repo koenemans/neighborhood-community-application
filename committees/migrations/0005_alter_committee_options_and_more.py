@@ -8,34 +8,47 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('auth', '0012_alter_user_first_name_max_length'),
-        ('committees', '0004_alter_committee_contact_person'),
+        ("auth", "0012_alter_user_first_name_max_length"),
+        ("committees", "0004_alter_committee_contact_person"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='committee',
-            options={'ordering': ['group'], 'verbose_name': 'Committee', 'verbose_name_plural': 'Committees'},
+            name="committee",
+            options={
+                "ordering": ["group"],
+                "verbose_name": "Committee",
+                "verbose_name_plural": "Committees",
+            },
         ),
         migrations.AlterField(
-            model_name='committee',
-            name='contact_person',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='committees', to=settings.AUTH_USER_MODEL, verbose_name='contact person'),
+            model_name="committee",
+            name="contact_person",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="committees",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="contact person",
+            ),
         ),
         migrations.AlterField(
-            model_name='committee',
-            name='description',
-            field=models.TextField(verbose_name='description'),
+            model_name="committee",
+            name="description",
+            field=models.TextField(verbose_name="description"),
         ),
         migrations.AlterField(
-            model_name='committee',
-            name='email',
-            field=models.EmailField(max_length=254, verbose_name='email'),
+            model_name="committee",
+            name="email",
+            field=models.EmailField(max_length=254, verbose_name="email"),
         ),
         migrations.AlterField(
-            model_name='committee',
-            name='group',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='auth.group', verbose_name='group'),
+            model_name="committee",
+            name="group",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="auth.group",
+                verbose_name="group",
+            ),
         ),
     ]

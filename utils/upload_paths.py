@@ -36,4 +36,3 @@ def hashed_upload_path(prefix: str) -> Callable[[object, str], str]:
         return f"{prefix}/{date_path}/{base}_{file_hash}{ext}"
 
     return uploader
-
