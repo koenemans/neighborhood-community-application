@@ -8,8 +8,8 @@ logger = logging.getLogger(__name__)
 
 
 class IndexView(ListView):
-    template_name = 'activities/index.html'
-    context_object_name = 'upcoming_activity_list'
+    template_name = "activities/index.html"
+    context_object_name = "upcoming_activity_list"
 
     def get_queryset(self):
         logger.debug("Fetching upcoming activities for index view")
@@ -18,17 +18,17 @@ class IndexView(ListView):
 
 class DetailView(DetailView):
     model = Activity
-    template_name = 'activities/detail.html'
+    template_name = "activities/detail.html"
 
 
 class ActivitiesArchiveView(base.TemplateView):
-    template_name = 'activities/archive.html'
-    context_object_name = 'grouped_activities'
+    template_name = "activities/archive.html"
+    context_object_name = "grouped_activities"
 
     def get_queryset(self):
         # Filter activities by committee if a query parameter is provided
         queryset = Activity.objects.all()
-        committee_slug = self.request.GET.get('committee')
+        committee_slug = self.request.GET.get("committee")
         if committee_slug:
             logger.info("Filtering activities for committee %s", committee_slug)
             queryset = queryset.filter(committee__slug=committee_slug)
@@ -44,17 +44,21 @@ class ActivitiesArchiveView(base.TemplateView):
         grouped_activities = {}
         for activity in queryset:
             year = activity.created_at.year
-            month = activity.created_at.strftime('%B')
-            grouped_activities.setdefault(year, {}).setdefault(month, []).append(activity)
+            month = activity.created_at.strftime("%B")
+            grouped_activities.setdefault(year, {}).setdefault(month, []).append(
+                activity
+            )
 
         # Add grouped activities and committees to the context
-        context['grouped_activities'] = grouped_activities
-        context['all_committees'] = Committee.objects.all()
-        committee_slug = self.request.GET.get('committee')
+        context["grouped_activities"] = grouped_activities
+        context["all_committees"] = Committee.objects.all()
+        committee_slug = self.request.GET.get("committee")
         if committee_slug:
-            context['filtered_committee'] = Committee.objects.filter(slug=committee_slug).first()
+            context["filtered_committee"] = Committee.objects.filter(
+                slug=committee_slug
+            ).first()
         else:
-            context['filtered_committee'] = None
+            context["filtered_committee"] = None
         logger.debug(
             "Prepared context with %d activities",
             sum(

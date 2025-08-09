@@ -6,18 +6,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('news', '0010_alter_post_options_post_attachement'),
+        ("news", "0010_alter_post_options_post_attachement"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='post',
-            name='attachement',
-            field=models.FileField(blank=True, null=True, upload_to='news/attachments/%Y/%m/%d/'),
+            model_name="post",
+            name="attachement",
+            field=models.FileField(
+                blank=True, null=True, upload_to="news/attachments/%Y/%m/%d/"
+            ),
         ),
         migrations.AlterField(
-            model_name='post',
-            name='poster',
-            field=models.ImageField(blank=True, null=True, upload_to='news/posters/%Y/%m/%d/'),
+            model_name="post",
+            name="poster",
+            field=models.ImageField(
+                blank=True, null=True, upload_to="news/posters/%Y/%m/%d/"
+            ),
         ),
     ]

@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('activities', '0009_alter_activity_options_alter_activity_start'),
+        ("activities", "0009_alter_activity_options_alter_activity_start"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='activity',
-            name='poster',
-            field=models.ImageField(blank=True, null=True, upload_to='activities/posters/%Y/%m/%d/'),
+            model_name="activity",
+            name="poster",
+            field=models.ImageField(
+                blank=True, null=True, upload_to="activities/posters/%Y/%m/%d/"
+            ),
         ),
     ]
