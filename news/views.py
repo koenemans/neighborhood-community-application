@@ -1,3 +1,5 @@
+"""Views for the news application."""
+
 import logging
 from django.views.generic import ListView, DetailView, base, TemplateView
 
@@ -8,28 +10,38 @@ logger = logging.getLogger(__name__)
 
 
 class HomePageView(TemplateView):
+    """Render the site's home page."""
+
     template_name = "home.html"
 
 
 class IndexView(ListView):
+    """Display a list of the latest news posts."""
+
     template_name = "news/index.html"
     context_object_name = "latest_posts_list"
 
     def get_queryset(self):
+        """Return the five most recent posts."""
         logger.debug("Fetching latest posts for index view")
         return Post.objects.all()[:5]
 
 
 class DetailView(DetailView):
+    """Display details for a single news post."""
+
     model = Post
     template_name = "news/detail.html"
 
 
 class NewsArchiveView(base.TemplateView):
+    """Render an archive of news posts grouped by date."""
+
     template_name = "news/archive.html"
     context_object_name = "grouped_news"
 
     def get_queryset(self):
+        """Return posts optionally filtered by committee slug."""
         # Filter posts by committee if a query parameter is provided
         queryset = Post.objects.all()
         committee_slug = self.request.GET.get("committee")
@@ -41,6 +53,7 @@ class NewsArchiveView(base.TemplateView):
         return queryset
 
     def get_context_data(self, **kwargs):
+        """Build the context with grouped news and committees."""
         context = super().get_context_data(**kwargs)
         queryset = self.get_queryset()
 
