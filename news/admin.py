@@ -1,3 +1,5 @@
+"""Admin configuration for the news application."""
+
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
@@ -5,6 +7,8 @@ from .models import Post
 
 
 class PostAdmin(admin.ModelAdmin):
+    """Admin interface definition for :class:`~news.models.Post`."""
+
     list_display = ("title", "created_at")
     list_filter = ("created_at", "updated_at")
     search_fields = ("title", "content")

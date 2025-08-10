@@ -1,3 +1,5 @@
+"""Views for the activities application."""
+
 import logging
 from django.views.generic import ListView, DetailView, base
 
@@ -8,24 +10,32 @@ logger = logging.getLogger(__name__)
 
 
 class IndexView(ListView):
+    """Display a list of upcoming activities."""
+
     template_name = "activities/index.html"
     context_object_name = "upcoming_activity_list"
 
     def get_queryset(self):
+        """Return the next five upcoming activities."""
         logger.debug("Fetching upcoming activities for index view")
         return Activity.objects.all()[:5]
 
 
 class DetailView(DetailView):
+    """Display the details of a single activity."""
+
     model = Activity
     template_name = "activities/detail.html"
 
 
 class ActivitiesArchiveView(base.TemplateView):
+    """Render an archive of activities grouped by date."""
+
     template_name = "activities/archive.html"
     context_object_name = "grouped_activities"
 
     def get_queryset(self):
+        """Return activities optionally filtered by committee slug."""
         # Filter activities by committee if a query parameter is provided
         queryset = Activity.objects.all()
         committee_slug = self.request.GET.get("committee")
@@ -37,6 +47,7 @@ class ActivitiesArchiveView(base.TemplateView):
         return queryset
 
     def get_context_data(self, **kwargs):
+        """Build the context with grouped activities and committees."""
         context = super().get_context_data(**kwargs)
         queryset = self.get_queryset()
 
