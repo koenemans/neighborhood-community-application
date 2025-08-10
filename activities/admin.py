@@ -1,3 +1,5 @@
+"""Admin configuration for the activities application."""
+
 from django.contrib import admin
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
@@ -6,6 +8,8 @@ from .models import Activity
 
 
 class ActivityAdmin(admin.ModelAdmin):
+    """Admin interface definition for :class:`~activities.models.Activity`."""
+
     list_display = ("title", "location", "start", "end")
     list_filter = ("start", "end")
     search_fields = ("title", "content", "location")
@@ -17,6 +21,7 @@ class ActivityAdmin(admin.ModelAdmin):
     ]
 
     def clean(self):
+        """Validate that the end date is not before the start date."""
         cleaned_data = super().clean()
         start = cleaned_data.get("start")
         end = cleaned_data.get("end")
