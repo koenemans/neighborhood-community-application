@@ -155,6 +155,19 @@ created automatically when the project starts.
 Logging statements are present in the news, activities, and committees apps to
 trace data retrieval and filtering operations, aiding debugging and observability.
 
+### Caching
+
+The project uses [Redis](https://redis.io/) for caching via
+[django-redis](https://github.com/jazzband/django-redis).
+By default, it connects to a local Redis instance at `redis://127.0.0.1:6379/1`.
+
+To use Azure Cache for Redis, set the `REDIS_URL` environment variable to the
+connection string provided by Azure. For example:
+
+```bash
+export REDIS_URL=rediss://:<password>@<hostname>:<port>/0
+```
+
 ### Committees and User Groups
 This application uses Django's built-in Groups functionality to manage committees:
 - Each committee is represented as a Django Group
