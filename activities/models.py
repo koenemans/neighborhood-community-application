@@ -1,3 +1,5 @@
+"""Database models for the activities application."""
+
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
@@ -9,6 +11,7 @@ from utils.upload_paths import hashed_upload_path
 
 
 def start_date_not_in_past(date):
+    """Ensure the provided date is not in the past."""
     if date < timezone.now():
         raise ValidationError(
             _("Start date: %(date)s cannot be in the past") % {"date": date},
@@ -17,7 +20,11 @@ def start_date_not_in_past(date):
 
 
 class Activity(models.Model):
+    """Model representing an activity organised by a committee."""
+
     class Meta:
+        """Metadata for the :class:`Activity` model."""
+
         verbose_name = _("Activity")
         verbose_name_plural = _("Activities")
         ordering = ["start"]
@@ -41,12 +48,15 @@ class Activity(models.Model):
     updated_at = models.DateTimeField(_("updated at"), auto_now=True)
 
     def save(self, *args, **kwargs):
+        """Generate a slug from the title on first save."""
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
+        """Return the URL for the activity detail page."""
         return reverse("activities:detail", args=[self.slug])
 
     def __str__(self):
+        """Return the string representation of the activity."""
         return self.title

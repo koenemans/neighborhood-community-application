@@ -1,3 +1,5 @@
+"""URL configuration for the news application."""
+
 from django.urls import path
 
 from . import views

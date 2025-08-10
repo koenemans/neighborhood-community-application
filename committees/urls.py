@@ -1,3 +1,5 @@
+"""URL configuration for the committees application."""
+
 from django.urls import path
 
 from . import views
