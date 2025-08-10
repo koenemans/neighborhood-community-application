@@ -1,0 +1,4 @@
+[MASTER]
+ignore=migrations,tests,.venv
+load-plugins=pylint_django
+django-settings-module=config.settings
