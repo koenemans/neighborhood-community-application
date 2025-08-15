@@ -19,5 +19,32 @@ class PostAdmin(admin.ModelAdmin):
         (_("Metadata"), {"fields": ["created_at"]}),
     ]
 
+    def has_change_permission(self, request, obj=None):
+        """Restrict edits to posts belonging to the user's committees."""
+        has_perm = super().has_change_permission(request, obj)
+        if not has_perm:
+            return False
+        if obj is not None and not request.user.is_superuser:
+            return obj.committee.group in request.user.groups.all()
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        """Restrict deletions to posts belonging to the user's committees."""
+        has_perm = super().has_delete_permission(request, obj)
+        if not has_perm:
+            return False
+        if obj is not None and not request.user.is_superuser:
+            return obj.committee.group in request.user.groups.all()
+        return True
+
+    def has_view_permission(self, request, obj=None):
+        """Restrict viewing to posts belonging to the user's committees."""
+        has_perm = super().has_view_permission(request, obj)
+        if not has_perm:
+            return False
+        if obj is not None and not request.user.is_superuser:
+            return obj.committee.group in request.user.groups.all()
+        return True
+
 
 admin.site.register(Post, PostAdmin)

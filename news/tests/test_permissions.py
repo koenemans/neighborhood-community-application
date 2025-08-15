@@ -87,8 +87,5 @@ class NewsPermissionsTest(TestCase):
         edit_url = reverse("admin:news_post_change", args=[self.post.id])
         response = self.client.get(edit_url)
 
-        # While they might be able to view the form, they should not have permission to save changes
-        # When implementing proper permissions, this should redirect or show an error
-        self.assertNotEqual(
-            response.status_code, 403
-        )  # Either 200 (can view) or 302 (redirect)
+        # The user should be denied access to edit another committee's post
+        self.assertEqual(response.status_code, 403)

@@ -3,10 +3,10 @@
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
-from django.utils.text import slugify
 from committees.models import Committee
 from django.utils.translation import gettext_lazy as _
 from utils.upload_paths import hashed_upload_path
+from utils.slug import generate_unique_slug
 
 
 class Post(models.Model):
@@ -41,9 +41,9 @@ class Post(models.Model):
     updated_at = models.DateTimeField(_("updated at"), auto_now=True)
 
     def save(self, *args, **kwargs):
-        """Generate a slug from the title on first save."""
+        """Generate a unique slug from the title on first save."""
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = generate_unique_slug(self, self.title)
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):

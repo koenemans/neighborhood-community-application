@@ -1,6 +1,9 @@
 """Views for the activities application."""
 
 import logging
+from django.utils import timezone
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from django.views.generic import ListView, DetailView, base
 
 from committees.models import Committee
@@ -18,7 +21,11 @@ class IndexView(ListView):
     def get_queryset(self):
         """Return the next five upcoming activities."""
         logger.debug("Fetching upcoming activities for index view")
-        return Activity.objects.all()[:5]
+        return (
+            Activity.objects.select_related("committee")
+            .filter(start__gte=timezone.now())
+            .order_by("start")[:5]
+        )
 
 
 class DetailView(DetailView):
@@ -28,6 +35,7 @@ class DetailView(DetailView):
     template_name = "activities/detail.html"
 
 
+@method_decorator(cache_page(60 * 15), name="dispatch")
 class ActivitiesArchiveView(base.TemplateView):
     """Render an archive of activities grouped by date."""
 
@@ -37,7 +45,7 @@ class ActivitiesArchiveView(base.TemplateView):
     def get_queryset(self):
         """Return activities optionally filtered by committee slug."""
         # Filter activities by committee if a query parameter is provided
-        queryset = Activity.objects.all()
+        queryset = Activity.objects.select_related("committee").all()
         committee_slug = self.request.GET.get("committee")
         if committee_slug:
             logger.info("Filtering activities for committee %s", committee_slug)
