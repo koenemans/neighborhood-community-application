@@ -69,6 +69,7 @@ This project is built with simplicity, extensibility, and contribution in mind.
 - Python 3.8+ installed
 - pip (Python package manager)
 - Git
+- Redis server (local install or via Docker)
 
 ### Installation
 
@@ -98,22 +99,34 @@ This project is built with simplicity, extensibility, and contribution in mind.
    pip install -r requirements.txt
    ```
 
-5. **Run database migrations**
+5. **Install pre-commit hooks** (optional but recommended)
+   ```bash
+   pre-commit install
+   ```
+
+6. **Start a Redis instance**
+   - Using [Docker](https://www.docker.com/):
+     ```bash
+     docker run --rm -p 6379:6379 redis
+     ```
+   - Or start a locally installed `redis-server`.
+
+7. **Run database migrations**
    ```bash
    python manage.py migrate
    ```
 
-6. **Create a superuser for admin access**
+8. **Create a superuser for admin access**
    ```bash
    python manage.py createsuperuser
    ```
 
-7. **Start the development server**
+9. **Start the development server**
    ```bash
    python manage.py runserver
    ```
 
-8. **Access the application**
+10. **Access the application**
    - Website: http://127.0.0.1:8000/
    - Admin portal: http://127.0.0.1:8000/admin/
 
@@ -159,10 +172,19 @@ trace data retrieval and filtering operations, aiding debugging and observabilit
 
 The project uses [Redis](https://redis.io/) for caching via
 [django-redis](https://github.com/jazzband/django-redis).
-By default, it connects to a local Redis instance at `redis://127.0.0.1:6379/1`.
+Make sure a Redis server is running before starting the Django app. For local
+development, the project connects by default to `redis://127.0.0.1:6379/1`.
 
-To use Azure Cache for Redis, set the `REDIS_URL` environment variable to the
-connection string provided by Azure. For example:
+You can start a local Redis instance with Docker:
+
+```bash
+docker run --rm -p 6379:6379 redis
+```
+
+or via a locally installed `redis-server`.
+
+To use Azure Cache for Redis or another remote instance, set the `REDIS_URL`
+environment variable to the connection string. For example:
 
 ```bash
 export REDIS_URL=rediss://:<password>@<hostname>:<port>/0
