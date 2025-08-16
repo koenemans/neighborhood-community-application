@@ -4,6 +4,7 @@ import logging
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.generic import ListView, DetailView, base, TemplateView
+from django.core.cache import cache
 
 from committees.models import Committee
 from .models import Post
@@ -26,7 +27,11 @@ class IndexView(ListView):
     def get_queryset(self):
         """Return the five most recent posts."""
         logger.debug("Fetching latest posts for index view")
-        return Post.objects.select_related("committee").all()[:5]
+        return cache.get_or_set(
+            "latest_posts",
+            lambda: list(Post.objects.select_related("committee").all()[:5]),
+            60 * 15,
+        )
 
 
 class DetailView(DetailView):
@@ -58,23 +63,31 @@ class NewsArchiveView(base.TemplateView):
     def get_context_data(self, **kwargs):
         """Build the context with grouped news and committees."""
         context = super().get_context_data(**kwargs)
-        queryset = self.get_queryset()
-
-        # Group posts by year and month
-        grouped_news = {}
-        for post in queryset:
-            year = post.created_at.year
-            month = post.created_at.strftime("%B")
-            grouped_news.setdefault(year, {}).setdefault(month, []).append(post)
-
-        # Add grouped news and committees to the context
-        context["grouped_news"] = grouped_news
-        context["all_committees"] = Committee.objects.all()
         committee_slug = self.request.GET.get("committee")
+        cache_key = f"news_archive_{committee_slug or 'all'}"
+        grouped_news = cache.get(cache_key)
+        if grouped_news is None:
+            queryset = self.get_queryset()
+
+            grouped_news = {}
+            for post in queryset:
+                year = post.created_at.year
+                month = post.created_at.strftime("%B")
+                grouped_news.setdefault(year, {}).setdefault(month, []).append(post)
+            cache.set(cache_key, grouped_news, 60 * 15)
+
+        context["grouped_news"] = grouped_news
+        context["all_committees"] = cache.get_or_set(
+            "all_committees",
+            lambda: list(Committee.objects.all()),
+            60 * 60,
+        )
         if committee_slug:
-            context["filtered_committee"] = Committee.objects.filter(
-                slug=committee_slug
-            ).first()
+            context["filtered_committee"] = cache.get_or_set(
+                f"committee_{committee_slug}",
+                lambda: Committee.objects.filter(slug=committee_slug).first(),
+                60 * 60,
+            )
         else:
             context["filtered_committee"] = None
         logger.debug(
