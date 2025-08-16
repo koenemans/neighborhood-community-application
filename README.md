@@ -115,20 +115,25 @@ This project is built with simplicity, extensibility, and contribution in mind.
    ```bash
    python manage.py migrate
    ```
+8. **Load sample data (optional)**
+   ```bash
+   python manage.py loaddata sample_data
+   ```
+   This provides example users, committees, news posts, and activities for local development. The default admin credentials are `admin` / `password`.
 
-8. **Create a superuser for admin access**
+9. **Create a superuser for admin access** (optional if using the sample data)
    ```bash
    python manage.py createsuperuser
    ```
 
-9. **Start the development server**
-   ```bash
-   python manage.py runserver
-   ```
+10. **Start the development server**
+    ```bash
+    python manage.py runserver
+    ```
 
-10. **Access the application**
-   - Website: http://127.0.0.1:8000/
-   - Admin portal: http://127.0.0.1:8000/admin/
+11. **Access the application**
+    - Website: http://127.0.0.1:8000/
+    - Admin portal: http://127.0.0.1:8000/admin/
 
 ### Development Workflow
 
