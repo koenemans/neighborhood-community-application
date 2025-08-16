@@ -1,0 +1,136 @@
+[
+  {
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+      "name": "General Committee",
+      "permissions": []
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 2,
+    "fields": {
+      "name": "Sports Committee",
+      "permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$SPxomNCxQNDqnxvMGdW7DA$5ZDEwGw46ON3aiyZJ8O3jZchva8ZZBv8euGwLsehr4o=",
+      "last_login": null,
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "Admin",
+      "last_name": "User",
+      "email": "admin@example.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z",
+      "groups": [1],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$SPxomNCxQNDqnxvMGdW7DA$5ZDEwGw46ON3aiyZJ8O3jZchva8ZZBv8euGwLsehr4o=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "john",
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z",
+      "groups": [2],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "committees.committee",
+    "pk": 1,
+    "fields": {
+      "group": 1,
+      "slug": "general-committee",
+      "description": "The general committee oversees neighborhood-wide initiatives.",
+      "contact_person": 1,
+      "email": "general@example.com"
+    }
+  },
+  {
+    "model": "committees.committee",
+    "pk": 2,
+    "fields": {
+      "group": 2,
+      "slug": "sports-committee",
+      "description": "The sports committee organizes sporting events for the community.",
+      "contact_person": 2,
+      "email": "sports@example.com"
+    }
+  },
+  {
+    "model": "news.post",
+    "pk": 1,
+    "fields": {
+      "title": "Welcome to the Neighborhood",
+      "slug": "welcome-to-the-neighborhood",
+      "content": "We are excited to launch our new community platform!",
+      "poster": null,
+      "attachment": null,
+      "committee": 1,
+      "created_at": "2024-01-02T09:00:00Z",
+      "updated_at": "2024-01-02T09:00:00Z"
+    }
+  },
+  {
+    "model": "news.post",
+    "pk": 2,
+    "fields": {
+      "title": "Annual Sports Day Announced",
+      "slug": "annual-sports-day-announced",
+      "content": "Join us for a day of fun and games at the annual sports day!",
+      "poster": null,
+      "attachment": null,
+      "committee": 2,
+      "created_at": "2024-01-05T10:00:00Z",
+      "updated_at": "2024-01-05T10:00:00Z"
+    }
+  },
+  {
+    "model": "activities.activity",
+    "pk": 1,
+    "fields": {
+      "title": "Community Picnic",
+      "slug": "community-picnic",
+      "content": "Bring your favorite dish and enjoy a picnic with neighbors.",
+      "start": "2030-06-01T12:00:00Z",
+      "end": "2030-06-01T15:00:00Z",
+      "location": "Central Park",
+      "poster": null,
+      "committee": 1,
+      "created_at": "2024-01-10T08:00:00Z",
+      "updated_at": "2024-01-10T08:00:00Z"
+    }
+  },
+  {
+    "model": "activities.activity",
+    "pk": 2,
+    "fields": {
+      "title": "Neighborhood Soccer Tournament",
+      "slug": "neighborhood-soccer-tournament",
+      "content": "Form a team and compete in our friendly soccer tournament.",
+      "start": "2030-07-15T09:00:00Z",
+      "end": "2030-07-15T17:00:00Z",
+      "location": "Community Sports Field",
+      "poster": null,
+      "committee": 2,
+      "created_at": "2024-01-12T08:00:00Z",
+      "updated_at": "2024-01-12T08:00:00Z"
+    }
+  }
+]
