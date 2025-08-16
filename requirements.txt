@@ -8,4 +8,7 @@ pylint==3.3.8
 pylint-django==2.6.1
 pre-commit==4.3.0
 gunicorn==23.0.0
-psycopg[binary]==3.1.18
+# Use the source distribution of psycopg so the package can be built for
+# newer Python releases such as 3.13 where precompiled binaries may not yet
+# be available.
+psycopg==3.2.9
