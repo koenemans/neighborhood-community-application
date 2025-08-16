@@ -1,6 +1,8 @@
 """Views for the news application."""
 
 import logging
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from django.views.generic import ListView, DetailView, base, TemplateView
 
 from committees.models import Committee
@@ -24,7 +26,7 @@ class IndexView(ListView):
     def get_queryset(self):
         """Return the five most recent posts."""
         logger.debug("Fetching latest posts for index view")
-        return Post.objects.all()[:5]
+        return Post.objects.select_related("committee").all()[:5]
 
 
 class DetailView(DetailView):
@@ -34,6 +36,7 @@ class DetailView(DetailView):
     template_name = "news/detail.html"
 
 
+@method_decorator(cache_page(60 * 15), name="dispatch")
 class NewsArchiveView(base.TemplateView):
     """Render an archive of news posts grouped by date."""
 
@@ -43,7 +46,7 @@ class NewsArchiveView(base.TemplateView):
     def get_queryset(self):
         """Return posts optionally filtered by committee slug."""
         # Filter posts by committee if a query parameter is provided
-        queryset = Post.objects.all()
+        queryset = Post.objects.select_related("committee").all()
         committee_slug = self.request.GET.get("committee")
         if committee_slug:
             logger.info("Filtering posts for committee %s", committee_slug)

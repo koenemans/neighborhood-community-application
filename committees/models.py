@@ -24,7 +24,8 @@ class Committee(models.Model):
     description = models.TextField(_("description"))
     contact_person = models.ForeignKey(
         User,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
+        null=True,
         related_name="committees",
         verbose_name=_("contact person"),
     )

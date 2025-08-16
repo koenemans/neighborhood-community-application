@@ -60,3 +60,31 @@ class ActivityPermissionsTest(TestCase):
         create_url = reverse("admin:activities_activity_add")
         response = self.client.get(create_url)
         self.assertEqual(response.status_code, 200)
+
+    def test_staff_user_cannot_edit_other_committee_activity(self):
+        """Staff users should not edit activities from other committees."""
+        # Create second user and committee
+        second_user = User.objects.create_user(
+            username="another_user", email="another@example.com", password="password"
+        )
+        second_user.is_staff = True
+        second_user.save()
+
+        second_group = Group.objects.create(name="Second Committee")
+        Committee.objects.create(
+            group=second_group,
+            slug="second-committee",
+            description="Another committee",
+            contact_person=second_user,
+            email="second@example.com",
+        )
+
+        change_permission = Permission.objects.get(codename="change_activity")
+        second_group.user_set.add(second_user)
+        second_group.permissions.add(change_permission)
+        second_group.save()
+
+        self.client.login(username="another_user", password="password")
+        edit_url = reverse("admin:activities_activity_change", args=[self.activity.id])
+        response = self.client.get(edit_url)
+        self.assertEqual(response.status_code, 403)
