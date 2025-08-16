@@ -151,6 +151,28 @@ This project is built with simplicity, extensibility, and contribution in mind.
    - Push your branch to the repository
    - Create a pull request with a description of your changes
 
+### Docker Setup
+
+The application can also be run inside containers for development or production.
+
+#### Development
+
+```bash
+docker compose up --build
+```
+
+This starts the Django development server along with PostgreSQL and Redis. Code
+changes on the host are reflected inside the container.
+
+#### Production
+
+```bash
+docker compose -f docker-compose.prod.yml up --build -d
+```
+
+The production configuration uses Gunicorn and should be run with appropriate
+environment variables for the database, cache and `SECRET_KEY`.
+
 ### Security Configuration
 
 Set the following environment variables for a secure deployment:
