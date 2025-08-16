@@ -2,6 +2,7 @@
 
 import logging
 from django.views.generic import ListView, DetailView
+from django.core.cache import cache
 
 from .models import Committee
 
@@ -17,7 +18,11 @@ class IndexView(ListView):
     def get_queryset(self):
         """Return all committees ordered by group name descending."""
         logger.debug("Fetching committee list ordered by group")
-        return Committee.objects.order_by("-group")
+        return cache.get_or_set(
+            "committee_index_list",
+            lambda: list(Committee.objects.order_by("-group")),
+            60 * 60,
+        )
 
 
 class DetailView(DetailView):
@@ -28,6 +33,11 @@ class DetailView(DetailView):
 
     def get_object(self, queryset=None):
         """Return the committee instance for the view."""
-        committee = super().get_object(queryset)
+        slug = self.kwargs.get("slug")
+        cache_key = f"committee_{slug}"
+        committee = cache.get(cache_key)
+        if committee is None:
+            committee = super().get_object(queryset)
+            cache.set(cache_key, committee, 60 * 60)
         logger.debug("Retrieved committee detail for %s", committee)
         return committee
