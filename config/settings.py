@@ -73,6 +73,7 @@ CSRF_TRUSTED_ORIGINS = (
 # Application definition
 
 INSTALLED_APPS = [
+    "siteconfig.apps.SiteconfigConfig",
     "news.apps.NewsConfig",
     "activities.apps.ActivitiesConfig",
     "committees.apps.CommitteesConfig",
@@ -107,6 +108,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "siteconfig.context_processors.site_settings",
             ],
         },
     },
