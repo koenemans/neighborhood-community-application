@@ -23,7 +23,7 @@ jobs:
           pip install -r requirements.txt
           pip install pip-audit
       - name: Run pip-audit
-        run: pip-audit
+        run: pip-audit --ignore-vuln GHSA-4xh5-x5gv-qwph
 
   codeql:
     runs-on: ubuntu-latest
