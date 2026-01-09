@@ -50,5 +50,5 @@ sortedcontainers==2.4.0
 sqlparse==0.5.3
 toml==0.10.2
 tomlkit==0.13.3
-urllib3==2.6.0
+urllib3==2.6.3
 virtualenv==20.33.1
