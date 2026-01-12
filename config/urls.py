@@ -26,6 +26,7 @@ urlpatterns = [
     path("news/", include("news.urls")),
     path("activities/", include("activities.urls")),
     path("committees/", include("committees.urls")),
+    path("settings/", include("siteconfig.urls")),
     path("admin/", admin.site.urls),
 ]
 

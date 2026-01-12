@@ -39,6 +39,9 @@ An archive view allows users to:
 - Browse content organized by **year and month**
 - Filtering above content by committee
 
+### 6. Customizable Branding
+Site administrators can update the community name, contact details, and logo through a simple settings form. Multiple branding configurations can be created and the active one selected in the Django admin.
+
 ---
 
 ## 🛠️ Tech Stack
