@@ -51,4 +51,4 @@ sqlparse==0.5.3
 toml==0.10.2
 tomlkit==0.13.3
 urllib3==2.6.3
-virtualenv==20.33.1
+virtualenv==20.36.1
