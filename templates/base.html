@@ -5,12 +5,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
-  <title>{% block title %}{% trans "Neighborhood Community" %}{% endblock %}</title>
+  <title>{% block title %}{{ site_config.site_name|default:_("Neighborhood Community") }}{% endblock %}</title>
 </head>
 <body>
   <header>
     <a href="{% block heading-link %}/{% endblock %}">
-        <h1>{% trans "Neighborhood Community" %}</h1>
+        <h1>{{ site_config.site_name|default:_("Neighborhood Community") }}</h1>
     </a>
     <nav aria-label="Main Navigation">
       {% block nav %}
@@ -29,7 +29,13 @@
   <footer>
     {% block footer %}
       <p>
-        <small>&copy; {% now "Y" %} {% trans "Neighborhood Community. All rights reserved." %}</small>
+        <small>&copy; {% now "Y" %} {{ site_config.site_name|default:_("Neighborhood Community") }}. {% trans "All rights reserved." %}</small><br>
+        {% if site_config and site_config.contact_email %}
+          <small>{{ site_config.contact_email }}</small><br>
+        {% endif %}
+        {% if site_config and site_config.contact_phone %}
+          <small>{{ site_config.contact_phone }}</small><br>
+        {% endif %}
       </p>
     {% endblock %}
   </footer>
