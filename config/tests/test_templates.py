@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.test import override_settings
+from siteconfig.models import SiteConfiguration
 
 
 @override_settings(LANGUAGE_CODE="en-us")
@@ -27,6 +28,11 @@ class TemplateTest(TestCase):
 
         # Check for copyright in footer
         self.assertContains(response, "Neighborhood Community")
+
+    def test_custom_site_name_displayed(self):
+        SiteConfiguration.objects.create(site_name="Custom Name")
+        response = self.client.get(reverse("home"))
+        self.assertContains(response, "Custom Name")
 
     def test_responsive_meta_tag(self):
         """Test that the viewport meta tag is included for responsiveness."""

@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Neighborhood Community" %}{% endblock %}
+{% block title %}{{ site_config.site_name|default:_("Neighborhood Community") }}{% endblock %}
 
 {% block content %}
   <header>
-    <p>{% trans "Welcome to the Neighborhood Community Application!" %}</p>
+    <p>{% blocktrans with name=site_config.site_name|default:_("Neighborhood Community") %}Welcome to the {{ name }} Application!{% endblocktrans %}</p>
     <p>{% trans "This is a platform where you can find information about local news, activities, and committees." %}</p>
   </header>
   <section>
